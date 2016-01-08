@@ -79,3 +79,8 @@ $ tar zxvf Django-1.5.4.tar.gz
 $ cd Django-1.5.4
 $ python setup.py install
 连带需要pip uninstall django-tagging   pip install "django-tagging<0.4"）
+
+启动graphite web界面
+# cd /opt/graphite
+# PYTHONPATH=`pwd`/storage/whisper ./bin/run-graphite-devel-server.py --port=8085 --libs=`pwd`/webapp /opt/graphite 1>/opt/graphite/storage/log/webapp/process.log 2>&1 &
+# tail -f /opt/graphite/storage/log/webapp/process.log
