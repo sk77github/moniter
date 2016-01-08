@@ -53,6 +53,12 @@ ln -s /usr/local/bin/python2.7 /usr/bin/python
 (
 http://cairographics.org/releases/py2cairo-1.10.0.tar.bz2
 tar -jxvf py2cairo-1.10.0.tar.bz2
+(?need cairo
+http://cairographics.org/releases/cairo-1.10.0.tar.gz
+./configure
+make
+make insall
+)
 CFLAGS="-l/usr/local/include/python2.7 -l/usr/local/bin" LDFLAGS="-lm -ldl -lutil" ./waf configure(? Could not find the python development headers)
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig(?'cairo' >= 1.10.0           : not found  )
 ./waf build
