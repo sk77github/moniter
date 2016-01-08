@@ -20,6 +20,12 @@ make && make altinstall
 echo $PATH
 which python
 ln -s /usr/local/bin/python2.7 /usr/bin/python 
+（因为yum是不兼容 Python 2.7的，所以yum不能正常工作，我们需要指定 yum 的Python版本
+#vi /usr/bin/yum  
+将文件头部的
+#!/usr/bin/python
+改成
+#!/usr/bin/python2.6.6）
 
 # sudo pip install twisted
 # cd /tmp
