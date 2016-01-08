@@ -1,0 +1,32 @@
+graphite:
+
+yum groupinstall "Development tools"
+yum install python-devel
+yum install zlib-devel
+yum install bzip2-devel
+yum install openssl-devel
+yum install ncurses-devel
+yum install sqlite-devel
+(yum -y install python-setuptools python-setuptools-devel ) ?
+easy_install pip
+
+(https://github.com/h2oai/h2o-2/wiki/Installing-python-2.7-on-centos-6.3.-Follow-this-sequence-exactly-for-centos-machine-only)
+cd /opt
+wget --no-check-certificate https://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
+tar xf Python-2.7.6.tar.xz
+cd Python-2.7.6
+./configure --prefix=/usr/local
+make && make altinstall
+echo $PATH
+which python
+ln -s /usr/local/bin/python2.7 /usr/bin/python 
+
+# sudo pip install twisted
+# cd /tmp
+# git clone https://github.com/graphite-project/carbon.git
+# cd /tmp/carbon
+# sudo python setup.py install
+# cd /tmp
+# git clone https://github.com/graphite-project/whisper.git
+# cd /tmp/whisper
+# sudo python setup.py install
