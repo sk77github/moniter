@@ -74,4 +74,8 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig(?'cairo' >= 1.10.0           : n
 # export PYTHONPATH=$PYTHONPATH:`pwd`/webapp
 # django-admin.py syncdb --settings=graphite.settings
 （？Django1.7版本以上不支持这个命令 work的方式之一是重装django低版本，
+$ wget  www.djangoproject.com/m/releases/1.5/Django-1.5.4.tar.gz
+$ tar zxvf Django-1.5.4.tar.gz 
+$ cd Django-1.5.4
+$ python setup.py install
 连带需要pip uninstall django-tagging   pip install "django-tagging<0.4"）
