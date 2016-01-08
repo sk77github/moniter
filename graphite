@@ -1,5 +1,6 @@
 graphite:
 
+准备工具
 yum groupinstall "Development tools"
 yum install python-devel
 yum install zlib-devel
@@ -10,6 +11,7 @@ yum install sqlite-devel
 (yum -y install python-setuptools python-setuptools-devel ) ?
 easy_install pip
 
+安装Python2.7
 (https://github.com/h2oai/h2o-2/wiki/Installing-python-2.7-on-centos-6.3.-Follow-this-sequence-exactly-for-centos-machine-only)
 cd /opt
 wget --no-check-certificate https://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
@@ -27,6 +29,7 @@ ln -s /usr/local/bin/python2.7 /usr/bin/python
 改成
 #!/usr/bin/python2.6.6）
 
+安装carbon
 # sudo pip install twisted
 # cd /tmp
 # git clone https://github.com/graphite-project/carbon.git
@@ -37,6 +40,7 @@ ln -s /usr/local/bin/python2.7 /usr/bin/python
 # cd /tmp/whisper
 # sudo python setup.py install
 
+安装graphite-web
 # git clone https://github.com/graphite-project/graphite-web.git
 # cd /tmp/graphite-web
 # python check-dependencies.py
@@ -64,3 +68,10 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig(?'cairo' >= 1.10.0           : n
 ./waf build
 ./waf install
 )
+
+数据库初始化
+# cd /opt/graphite
+# export PYTHONPATH=$PYTHONPATH:`pwd`/webapp
+# django-admin.py syncdb --settings=graphite.settings
+（？Django1.7版本以上不支持这个命令 work的方式之一是重装django低版本，
+连带需要pip uninstall django-tagging   pip install "django-tagging<0.4"）
