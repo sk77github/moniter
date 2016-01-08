@@ -36,3 +36,18 @@ ln -s /usr/local/bin/python2.7 /usr/bin/python
 # git clone https://github.com/graphite-project/whisper.git
 # cd /tmp/whisper
 # sudo python setup.py install
+
+# git clone https://github.com/graphite-project/graphite-web.git
+# cd /tmp/graphite-web
+# python check-dependencies.py
+# sudo yum install cairo-devel
+# sudo yum install pycairo-devel
+# sudo pip install django
+# sudo pip install pyparsing
+# sudo pip install django-tagging
+# sudo pip install python-memcached
+# sudo pip install txamqp
+# sudo pip install pytz
+# cd /tmp/graphite-web
+# python check-dependencies.py
+http://cairographics.org/releases/py2cairo-1.10.0.tar.bz2
