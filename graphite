@@ -17,7 +17,7 @@ cd /opt
 wget --no-check-certificate https://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
 tar xf Python-2.7.6.tar.xz
 cd Python-2.7.6
-./configure --prefix=/usr/local
+./configure --prefix=/usr/local --enable-shared(这个安装mod_wsgi时要用到)
 make && make altinstall
 echo $PATH
 which python
@@ -73,7 +73,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig(?'cairo' >= 1.10.0           : n
 # cd /opt/graphite
 # export PYTHONPATH=$PYTHONPATH:`pwd`/webapp
 # django-admin.py syncdb --settings=graphite.settings
-（？Django1.7版本以上不支持这个命令 work的方式之一是重装django低版本，
+（？Django1.7版本以上不支持这个命令 work的方式之一是重装django低版本，1.5版本较佳
 $ wget  www.djangoproject.com/m/releases/1.5/Django-1.5.4.tar.gz
 $ tar zxvf Django-1.5.4.tar.gz 
 $ cd Django-1.5.4
@@ -84,3 +84,7 @@ $ python setup.py install
 # cd /opt/graphite
 # PYTHONPATH=`pwd`/storage/whisper ./bin/run-graphite-devel-server.py --port=8085 --libs=`pwd`/webapp /opt/graphite 1>/opt/graphite/storage/log/webapp/process.log 2>&1 &
 # tail -f /opt/graphite/storage/log/webapp/process.log
+
+
+yum install httpd-devel
+https://github.com/GrahamDumpleton/mod_wsgi/releases
