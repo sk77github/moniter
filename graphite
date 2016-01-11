@@ -103,3 +103,7 @@ whicn apxs
 make
 make install
 Apache主配置加入 LoadModule wsgi_module modules/mod_wsgi.so
+apache log(?Permission denied: mod_wsgi (pid=26962): Unable to connect to WSGI \
+ daemon process '<process-name>' on '/etc/httpd/logs/wsgi.26957.0.1.sock' 
+ graphite.conf虚拟主机段外加入 WSGISocketPrefix run/wsgi
+ )
