@@ -1,3 +1,5 @@
+这里其实是一个Linux环境配置问题，Linux的工作方式以及它的相关概念（包，头，编译，依赖，扩展，二进制等等）
+
 graphite:
 
 准备工具
@@ -21,6 +23,12 @@ cd Python-2.7.6
 make && make altinstall
 echo $PATH
 which python
+Python -V （？python: error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory
+ find /usr -name "libpython2.7.so.1.0"
+ /usr/local/lib/libpython2.7.so.1.0
+ vim /etc/ld.so.conf
+ /sbin/ldconfig -v
+）
 ln -s /usr/local/bin/python2.7 /usr/bin/python 
 （因为yum是不兼容 Python 2.7的，所以yum不能正常工作，我们需要指定 yum 的Python版本
 #vi /usr/bin/yum  
@@ -86,5 +94,12 @@ $ python setup.py install
 # tail -f /opt/graphite/storage/log/webapp/process.log
 
 
-yum install httpd-devel
+yum install httpd-devel（--with-apxs=apxs 需要）
 https://github.com/GrahamDumpleton/mod_wsgi/releases
+cd 到文件目录
+which Python 
+whicn apxs
+./configure --with-python=python目录 --with-apxs=apxs目录
+make
+make install
+Apache主配置加入 LoadModule wsgi_module modules/mod_wsgi.so
