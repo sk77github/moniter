@@ -1,0 +1,12 @@
+wget http://mirror.bit.edu.cn/apache/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
+tar -xzf kafka_2.11-0.9.0.0.tgz
+cd kafka_2.11-0.9.0.0
+nohup bin/zookeeper-server-start.sh config/zookeeper.properties &
+nohup bin/kafka-server-start.sh config/server.properties &
+
+Create a topic
+
+> bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+
+> bin/kafka-topics.sh --list --zookeeper localhost:2181
+test
