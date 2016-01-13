@@ -127,3 +127,39 @@ apache log(?Permission denied: mod_wsgi (pid=26962): Unable to connect to WSGI \
  daemon process '<process-name>' on '/etc/httpd/logs/wsgi.26957.0.1.sock' 
  graphite.conf虚拟主机段外加入 WSGISocketPrefix run/wsgi
  )
+
+
+
+
+//start graphite.conf
+Listen 13333
+
+<VirtualHost *:13333>
+  ServerName graphite
+  DocumentRoot "/opt/graphite/webapp"
+  ErrorLog /var/log/httpd/graphite_error.log
+  CustomLog /var/log/httpd/graphite_access.log common
+
+  WSGIDaemonProcess graphite processes=5 threads=5 display-name='%{GROUP}' inactivity-timeout=120
+  WSGIProcessGroup graphite
+
+  WSGIScriptAlias / /opt/graphite/conf/graphite.wsgi
+
+
+  Alias /content/ /opt/graphite/webapp/content
+
+  SetHandler None
+
+  Alias /media/ "/usr/local/lib/python2.7/site-packages/django/contrib/admin/media/"
+
+  SetHandLer None
+
+  <Directory /opt/graphite/conf/>
+     Order deny,allow
+     Allow from all
+  </Directory>
+
+</VirtualHost>
+
+WSGISocketPrefix run/wsgi
+//end graphite conf
