@@ -58,6 +58,7 @@ python get-pip.py(python2.7.9之前版本默认不带pip)
 安装graphite-web
 # git clone https://github.com/graphite-project/graphite-web.git
 # cd /tmp/graphite-web
+python setup.py install   执行前需检查环境是否满足
 # python check-dependencies.py
 # sudo yum install cairo-devel
 # sudo yum install pycairo-devel
@@ -96,6 +97,7 @@ make insall
 ./waf build
 ./waf install
 )
+python setup.py install
 
 数据库初始化
 # cd /opt/graphite
