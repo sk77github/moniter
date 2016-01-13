@@ -97,7 +97,7 @@ make insall
 ./waf build
 ./waf install
 )
-python setup.py install
+python setup.py install （修改setup.py脚本可自定义安装目录）
 
 数据库初始化
 # cd /opt/graphite
@@ -110,7 +110,18 @@ $ cd Django-1.5.4
 $ python setup.py install
 连带需要pip uninstall django-tagging   pip install "django-tagging<0.4"）
 
-启动graphite web界面
+
+Graphite Web配置：
+/data/graphite/webapp/graphite/local_settings.py.example  配置文件
+
+Graphite Web应用中包含默认的仪表盘和图表模版。拷贝样例配置文件：
+# cd /data/graphite/conf
+# cp dashboard.conf.example dashboard.conf
+# cp graphTemplates.conf.example graphTemplates.conf
+
+
+
+启动graphite web界面（这种方式测试用了，目前直接在Apache里）
 # cd /opt/graphite
 # PYTHONPATH=`pwd`/storage/whisper ./bin/run-graphite-devel-server.py --port=8085 --libs=`pwd`/webapp /opt/graphite 1>/opt/graphite/storage/log/webapp/process.log 2>&1 &
 # tail -f /opt/graphite/storage/log/webapp/process.log
