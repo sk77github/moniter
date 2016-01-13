@@ -144,6 +144,8 @@ apache log(?Permission denied: mod_wsgi (pid=26962): Unable to connect to WSGI \
 
 graphite  WSGI配置：
 cp /data/graphite/conf/graphite.wsgi.example /data/graphite/conf/graphite.wsgi
+chmod 666  /data/graphite/storage/log/webapp/
+vim /data/graphite/conf/graphite.wsgi        （如果自定义目录需更改）
 
 
 //start graphite.conf
