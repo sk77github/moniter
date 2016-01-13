@@ -99,6 +99,10 @@ make insall
 )
 python setup.py install （修改setup.py脚本可自定义安装目录）
 
+
+主要是carbon，whisper，graphite-web的Python setting.py install  其他都是预环境的准备
+以下配置则是graphite自己的应用配置
+
 数据库初始化
 # cd /opt/graphite
 # export PYTHONPATH=$PYTHONPATH:`pwd`/webapp
@@ -146,6 +150,7 @@ graphite  WSGI配置：
 cp /data/graphite/conf/graphite.wsgi.example /data/graphite/conf/graphite.wsgi
 chmod 666  /data/graphite/storage/log/webapp/
 vim /data/graphite/conf/graphite.wsgi        （如果自定义目录需更改）
+chmod -R 777 /data/graphite/storage/log/      （如果报log没权限需要）
 
 
 //start graphite.conf
