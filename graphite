@@ -39,6 +39,13 @@ ln -s /usr/local/bin/python2.7 /usr/bin/python
 
 安装carbon
 # sudo pip install twisted
+(?ImportError: No module named pkg_resources
+wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -O - | python 结果：
+Installed /usr/local/lib/python2.7/site-packages/setuptools-19.2-py2.7.egg
+?pip==7.1.2' distribution was not found and is required by the application
+wget --no-check-certificate  https://bootstrap.pypa.io/get-pip.py
+python get-pip.py(python2.7.9之前版本默认不带pip) 
+)
 # cd /tmp
 # git clone https://github.com/graphite-project/carbon.git
 # cd /tmp/carbon
@@ -54,11 +61,18 @@ ln -s /usr/local/bin/python2.7 /usr/bin/python
 # python check-dependencies.py
 # sudo yum install cairo-devel
 # sudo yum install pycairo-devel
-# sudo pip install django
+（？# sudo pip install django
+（？Django1.7版本以上不支持这个命令 work的方式之一是重装django低版本，1.5版本较佳
+$ wget  www.djangoproject.com/m/releases/1.5/Django-1.5.4.tar.gz
+$ tar zxvf Django-1.5.4.tar.gz 
+$ cd Django-1.5.4
+$ python setup.py install
+？# sudo pip install django-tagging
+？连带需要pip uninstall django-tagging   pip install "django-tagging<0.4"
+）
 # sudo pip install pyparsing
-# sudo pip install django-tagging
-# sudo pip install python-memcached
-# sudo pip install txamqp
+# sudo pip install python-memcached  非必须
+# sudo pip install txamqp            非必须
 # sudo pip install pytz
 # cd /tmp/graphite-web
 # python check-dependencies.py
