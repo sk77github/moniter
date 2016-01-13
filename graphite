@@ -49,16 +49,16 @@ python get-pip.py(python2.7.9之前版本默认不带pip)
 # cd /tmp
 # git clone https://github.com/graphite-project/carbon.git
 # cd /tmp/carbon
-# sudo python setup.py install
+# sudo python setup.py install  （修改setup.py脚本可自定义安装目录）
 # cd /tmp
 # git clone https://github.com/graphite-project/whisper.git
 # cd /tmp/whisper
-# sudo python setup.py install
+# sudo python setup.py install （修改setup.py脚本可自定义安装目录）
 
 安装graphite-web
 # git clone https://github.com/graphite-project/graphite-web.git
 # cd /tmp/graphite-web
-python setup.py install   执行前需检查环境是否满足
+python setup.py install   执行前需检查环境是否满足（修改setup.py脚本可自定义安装目录）
 # python check-dependencies.py
 # sudo yum install cairo-devel
 # sudo yum install pycairo-devel
