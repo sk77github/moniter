@@ -1,0 +1,14 @@
+wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz
+tar -zxvf zookeeper-3.3.6.tar.gz 
+cp conf/zoo_sample.cfg conf/zoo.cfg
+vim conf/zoo.cfg(
+tickTime=2000
+dataDir=/var/lib/zookeeper
+clientPort=2181
+initLimit=5
+syncLimit=2
+server.1=zoo1:2888:3888
+server.2=zoo2:2888:3888
+server.3=zoo3:2888:3888
+)
+bin/zkServer.sh start
