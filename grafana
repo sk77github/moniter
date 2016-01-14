@@ -1,0 +1,21 @@
+wget https://grafanarel.s3.amazonaws.com/builds/grafana-2.6.0-1.x86_64.rpm
+rpm -Uvh grafana-2.6.0-1.x86_64.rpm    
+(
+You can start Grafana by running:
+$ sudo service grafana-server start
+
+This will start the grafana-server process as the grafana user, which is created during package installation. 
+The default HTTP port is 3000, and default user and group is admin.
+
+To configure the Grafana server to start at boot time:
+$ sudo /sbin/chkconfig --add grafana-server
+ 
+Package details
+Installs binary to /usr/sbin/grafana-server
+Copies init.d script to /etc/init.d/grafana-server
+Installs default file (environment vars) to /etc/sysconfig/grafana-server
+Copies configuration file to /etc/grafana/grafana.ini
+Installs systemd service (if systemd is available) name grafana-server.service
+The default configuration uses a log file at /var/log/grafana/grafana.log
+The default configuration specifies an sqlite3 database at /var/lib/grafana/grafana.db
+) 
