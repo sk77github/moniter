@@ -62,8 +62,8 @@ python get-pip.py(python2.7.9之前版本默认不带pip)
 # cd /tmp/graphite-web
 python setup.py install   执行前需检查环境是否满足（修改setup.py脚本可自定义安装目录）
 # python check-dependencies.py
-# sudo yum install cairo-devel
-# sudo yum install pycairo-devel
+# sudo yum install cairo-devel（现在yum已经是2.6的了 这一步可以不做）
+# sudo yum install pycairo-devel（现在yum已经是2.6的了，这一步可以不做）
 （？# sudo pip install django
 （？Django1.7版本以上不支持这个命令 work的方式之一是重装django低版本，1.5版本较佳
 $ wget  www.djangoproject.com/m/releases/1.5/Django-1.5.4.tar.gz
@@ -94,7 +94,9 @@ wget http://cairographics.org/releases/cairo-1.10.0.tar.gz
 tar -zxvf cairo-1.10.0.tar.gz
 ./configure
 make
-make insall
+make install
+安装完执行./waf configure 如果仍报cairo 1.10.0 not found 需要执行：
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 )
 ./waf build
 ./waf install
