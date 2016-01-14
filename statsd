@@ -1,0 +1,4 @@
+yum install nodejs  （centos的一些版本没有源）
+
+https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.xz  二进制版本
+
