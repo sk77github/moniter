@@ -6,3 +6,14 @@ cd statsd
 Create a config file from exampleConfig.js and put it somewhere
 Start the Daemon:
 node stats.js /path/to/config
+
+
+logstash中的statsd输出配置：
+output {
+  statsd {
+    host => "192.168.1.14"
+    port => 8125
+    namespace => "logstash"
+    increment => "exception.number"
+  }
+}
