@@ -189,3 +189,11 @@ Listen 13333
 
 WSGISocketPrefix run/wsgi
 //end graphite conf
+
+
+
+启动carbon
+cd /data/graphite/conf
+cp carbon.conf.example carbon.conf 
+cp storage-schemas.conf.example storage-schemas.conf
+/data/graphite/bin/carbon-cache.py start
