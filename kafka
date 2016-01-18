@@ -25,3 +25,14 @@ To remove an override you can do
  > bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic my-topic
     --deleteConfig max.message.bytes
 
+增加partition
+bin/kafka-topics.sh --zookeeper zk_host:port/chroot --alter --topic my_topic_name
+       --partitions 40
+       
+减少partition，改变复制因子
+Kafka does not currently support reducing the number of partitions for a topic or changing the replication factor.
+
+删除topic
+ > bin/kafka-topics.sh --zookeeper zk_host:port/chroot --delete --topic my_topic_name
+Topic deletion option is disabled by default. To enable it set the server config
+delete.topic.enable=true
