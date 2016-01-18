@@ -1,11 +1,110 @@
-yum install nodejs  （centos的一些版本没有源）
+yum install nodejs  
+（?centos的一些版本没有源
+yum install epel-release 
+ls -lah /etc/yum.repos.d/
+(？rpm -e epel-release
+如果ls -lah /etc/yum.repos.d/找不到epel源，说明之前有安装脏
+需要rpm -e epel-release
+再yum install epel-release
+）
+yum install nodejs 
+yum install npm --enablerepo=epel
+）
 
-https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.xz  二进制版本
+
+二进制安装：https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.xz  二进制版本
+安装statsd
 git clone https://github.com/etsy/statsd.git
 cd statsd
 Create a config file from exampleConfig.js and put it somewhere
 Start the Daemon:
 node stats.js /path/to/config
+
+将statsd做成服务：
+//vim start
+vim /etc/init.d/statsd   
+#!/bin/bash
+#
+# StatsD
+#
+# chkconfig: 3 50 50
+# description: StatsD init.d
+. /etc/rc.d/init.d/functions
+
+prog=statsd
+STATSDDIR=/data/statsd
+statsd=./stats.js
+LOG=/var/log/statsd.log
+ERRLOG=/var/log/statsderr.log
+CONFFILE=${STATSDDIR}/localConfig.js
+pidfile=/var/run/statsd.pid
+lockfile=/var/lock/subsys/statsd
+RETVAL=0
+STOP_TIMEOUT=${STOP_TIMEOUT-10}
+
+start() {
+    echo -n $"Starting $prog: "
+    cd ${STATSDDIR}
+
+    # See if it's already running. Look *only* at the pid file.
+    if [ -f ${pidfile} ]; then
+        failure "PID file exists for statsd"
+        RETVAL=1
+    else
+        # Run as process
+        node ${statsd} ${CONFFILE} >> ${LOG} 2>> ${ERRLOG} &
+        RETVAL=$?
+
+        # Store PID
+        echo $! > ${pidfile}
+
+        # Success
+        [ $RETVAL = 0 ] && success "statsd started"
+    fi
+
+    echo
+    return $RETVAL
+}
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc -p ${pidfile}
+    RETVAL=$?
+    echo
+    [ $RETVAL = 0 ] && rm -f ${pidfile}
+}
+
+# See how we were called.
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    status -p ${pidfile} ${prog}
+    RETVAL=$?
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  condrestart)
+    if [ -f ${pidfile} ] ; then
+        stop
+        start
+    fi
+    ;;
+  *)
+    echo $"Usage: $prog {start|stop|restart|condrestart|status}"
+    exit 1
+esac
+
+exit $RETVAL
+//vim end
+chmod 0755 /etc/init.d/statsd
+chkconfig --add statsd
+
 
 
 logstash中的statsd输出配置：
