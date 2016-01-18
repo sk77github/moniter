@@ -6,7 +6,22 @@ nohup bin/kafka-server-start.sh config/server.properties &
 
 Create a topic
 
+创建一个topic
 > bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic my-topic --partitions 1 
+                    --replication-factor 1 --config max.message.bytes=64000 --config flush.messages=1（创建时也可覆盖默认配置）
 
+查看所有topic
 > bin/kafka-topics.sh --list --zookeeper localhost:2181
 test
+
+查看某个topic的分布情况
+bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
+
+动态更改topic配置
+> bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic my-topic
+    --config max.message.bytes=128000
+To remove an override you can do
+ > bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic my-topic
+    --deleteConfig max.message.bytes
+
