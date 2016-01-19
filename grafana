@@ -19,3 +19,16 @@ Installs systemd service (if systemd is available) name grafana-server.service
 The default configuration uses a log file at /var/log/grafana/grafana.log
 The default configuration specifies an sqlite3 database at /var/lib/grafana/grafana.db
 ) 
+
+
+
+编译安装带alerting版本：
+创建项目空间
+mkdir /data/grafana
+设定GOPATH
+export GOPATH=/data/grafana
+验证设定正确
+echo $GOPATH
+获取grafana源码
+go get github.com/grafana/grafana
+
