@@ -282,4 +282,6 @@ CARBONLINK_HOSTS = ["127.0.0.1:7012:a", "127.0.0.1:7022:b"]
 Y机器配置与X机器配置相同
 
 Z机器（前端界面）配置
+CLUSTER_SERVERS = ["xxx.xxx.xxx.xxx:80", "yyy.yyy.yyy.yyy:80"]
+由X机器和Y机器组成graphite web集群
 
