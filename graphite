@@ -200,3 +200,39 @@ cd /data/graphite/conf
 cp carbon.conf.example carbon.conf 
 cp storage-schemas.conf.example storage-schemas.conf
 /data/graphite/bin/carbon-cache.py start
+
+
+启动多实例carbon
+//VIM START
+vim conf/carbon.conf
+[cache]
+LINE_RECEIVER_INTERFACE = 127.0.0.1
+PICKLE_RECEIVER_INTERFACE = 127.0.0.1
+CACHE_QUERY_INTERFACE = 127.0.0.1
+
+[cache:1]
+LINE_RECEIVER_PORT = 2013
+PICKLE_RECEIVER_PORT = 2014
+CACHE_QUERY_PORT = 7012
+
+[cache:2]
+LINE_RECEIVER_PORT = 2023
+PICKLE_RECEIVER_PORT = 2024
+CACHE_QUERY_PORT = 7022
+//VIM END
+
+bin/carbon-cache.py --instance=1 start 
+bin/carbon-cache.py --instance=2 start
+
+//VIM START
+vim conf/carbon.conf
+[relay]
+LINE_RECEIVER_INTERFACE = 0.0.0.0
+LINE_RECEIVER_PORT = 2003
+PICKLE_RECEIVER_INTERFACE = 0.0.0.0
+PICKLE_RECEIVER_PORT = 2004
+RELAY_METHOD = consistent-hashing 
+DESTINATIONS = 127.0.0.1:2014:1, 127.0.0.1:2024:2 
+//VIM END
+
+bin/carbon-relay.py start
