@@ -285,3 +285,14 @@ Z机器（前端界面）配置
 CLUSTER_SERVERS = ["xxx.xxx.xxx.xxx:80", "yyy.yyy.yyy.yyy:80"]
 由X机器和Y机器组成graphite web集群
 
+
+
+graphite工具链
+http://graphite.readthedocs.org/en/latest/tools.html
+
+Ganglia
+A scalable distributed monitoring system for high-performance computing systems such as clusters and Grids.
+It collects system performance metrics and stores them in RRD,
+but now there is an add-on（https://github.com/ganglia/ganglia_contrib/tree/master/graphite_integration/） that allows
+Ganglia to send metrics directly to Graphite. 
+Further integration work is underway.
