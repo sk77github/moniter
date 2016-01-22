@@ -296,3 +296,5 @@ It collects system performance metrics and stores them in RRD,
 but now there is an add-on（https://github.com/ganglia/ganglia_contrib/tree/master/graphite_integration/） that allows
 Ganglia to send metrics directly to Graphite. 
 Further integration work is underway.
+
+whisperctl 0.2.0	       A tool for managing Whisper databases used in Graphite.
