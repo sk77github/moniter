@@ -24,6 +24,10 @@ tar xf Python-2.7.6.tar.xz
 cd Python-2.7.6
 ./configure --prefix=/usr/local --enable-shared(这个安装mod_wsgi时要用到)
 make && make altinstall
+(
+make install can overwrite or masquerade the python3 binary. 
+make altinstall is therefore recommended instead of make install since it only installs exec_prefix/bin/pythonversion.
+)
 echo $PATH
 which python
 Python -V （？python: error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory
