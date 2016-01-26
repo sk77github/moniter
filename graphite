@@ -31,7 +31,7 @@ See https://docs.djangoproject.com/en/dev/releases/1.6/#new-test-runner for more
 #export PYTHONPATH=$PYTHONPATH:`pwd`/webapp 
 /opt/graphite/webapp/graphite/settings.py:246: UserWarning: SECRET_KEY is set to an unsafe default. 
 This should be set in local_settings.py for better security
-#vim /opt/graphite/webapp/graphite/settings.py
+#cp local_settings.py.example local_settings.py
 #django-admin.py syncdb --settings=graphite.settings
 4.
 安装Apache及mod_wsgi
