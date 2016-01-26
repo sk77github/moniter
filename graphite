@@ -1,6 +1,29 @@
 这里其实是一个Linux环境配置问题，Linux的工作方式以及它的相关概念（包，头，编译，依赖，扩展，二进制等等）
 以及要创建相关的安装和运行用户和组
 
+
+
+pip安装：
+graphite-web还不支持Python3，而Twisted requires Python 2.7 or later.
+故使用Python2.7版本。最新的2.7版本是2.7.11.https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tar.xz
+1.
+按照https://github.com/sk77github/language/blob/master/Python-environment 安装Python环境
+2.
+pipxx.xx（版本号） install carbon
+pipxx.xx（版本号） install whisper
+pipxx.xx（版本号） install graphite-web
+
+
+
+
+
+
+
+
+
+
+
+
 graphite:
 (yum -y install python-setuptools python-setuptools-devel ) ?
 easy_install pip
