@@ -33,6 +33,7 @@ See https://docs.djangoproject.com/en/dev/releases/1.6/#new-test-runner for more
 This should be set in local_settings.py for better security
 #vim /opt/graphite/webapp/graphite/settings.py
 #django-admin.py syncdb --settings=graphite.settings
+4.安装Apache及mod_wsgi
 
 
 
