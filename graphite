@@ -3,6 +3,8 @@
 
 
 
+安装文档：http://graphite.readthedocs.org/en/latest/install.html
+
 pip安装：
 graphite-web还不支持Python3，而Twisted requires Python 2.7 or later.
 故使用Python2.7版本。最新的2.7版本是2.7.11.https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tar.xz
