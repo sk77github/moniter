@@ -36,30 +36,30 @@ This should be set in local_settings.py for better security
 4.
 安装Apache及mod_wsgi
 yum install mod_wsgi （yum是基于Python2.6的安装，现在是Python2.7，所以不能用yum安装mod_wsgi）
-yum install httpd
+#yum install httpd
 安装WSGI：
-yum install httpd-devel（--with-apxs=apxs 需要）
+#yum install httpd-devel（--with-apxs=apxs 需要）
 https://github.com/GrahamDumpleton/mod_wsgi/releases
-wget --no-check-certificate https://github.com/GrahamDumpleton/mod_wsgi/archive/4.4.21.tar.gz
-cd 到文件目录
-which Python 
-which apxs
-./configure --with-python=python目录 --with-apxs=apxs目录
-make
-make install
+#wget --no-check-certificate https://github.com/GrahamDumpleton/mod_wsgi/archive/4.4.21.tar.gz
+#cd 到文件目录
+#which Python 
+#which apxs
+#./configure --with-python=python目录 --with-apxs=apxs目录
+#make
+#make install
 （？python: error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory
- find /usr -name "libpython2.7.so.1.0"
- /usr/local/lib/libpython2.7.so.1.0
- vim /etc/ld.so.conf 加入 /usr/local/lib
- /sbin/ldconfig -v
+#find /usr -name "libpython2.7.so.1.0"
+#/usr/local/lib/libpython2.7.so.1.0
+#vim /etc/ld.so.conf 加入 /usr/local/lib
+#/sbin/ldconfig -v
 ）
-Apache主配置加入 LoadModule wsgi_module modules/mod_wsgi.so
+#Apache主配置加入 LoadModule wsgi_module modules/mod_wsgi.so
 5.
 graphite 配置
-cp local_settings.py.example local_settings.py
+#cp local_settings.py.example local_settings.py
 graphite  WSGI配置：
-cp graphite.wsgi.example graphite.wsgi
-chown apache.apache -R /opt/graphite 
+#cp graphite.wsgi.example graphite.wsgi
+#chown apache.apache -R /opt/graphite 
 
 //start graphite.conf
 Listen 13333
