@@ -58,11 +58,8 @@ Apache主配置加入 LoadModule wsgi_module modules/mod_wsgi.so
 graphite 配置
 cp local_settings.py.example local_settings.py
 graphite  WSGI配置：
- cp graphite.wsgi.example graphite.wsgi
-chmod 666  /data/graphite/storage/log/webapp/
-vim /data/graphite/conf/graphite.wsgi        （如果自定义目录需更改）
-chmod -R 777 /data/graphite/storage/log/      （如果报log没权限需要）
-
+cp graphite.wsgi.example graphite.wsgi
+chown apache.apache -R /opt/graphite 
 
 //start graphite.conf
 Listen 13333
