@@ -122,6 +122,9 @@ PICKLE_RECEIVER_PORT = 2004
 //relay端口2004接收A机器打来的数据
 DESTINATIONS = 127.0.0.1:2014:a, 127.0.0.1:2024:b
 //将relay 2004端口接收来的数据打到本机的多个carbon cache实例上
+RELAY_METHOD = consistent-hashing
+//relay方法用一致性hash
+[cache]
 LINE_RECEIVER_INTERFACE = 127.0.0.1
 PICKLE_RECEIVER_INTERFACE = 127.0.0.1
 CACHE_QUERY_INTERFACE = 127.0.0.1
