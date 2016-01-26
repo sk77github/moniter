@@ -47,6 +47,12 @@ which apxs
 ./configure --with-python=python目录 --with-apxs=apxs目录
 make
 make install
+（？python: error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory
+ find /usr -name "libpython2.7.so.1.0"
+ /usr/local/lib/libpython2.7.so.1.0
+ vim /etc/ld.so.conf 加入 /usr/local/lib
+ /sbin/ldconfig -v
+）
 Apache主配置加入 LoadModule wsgi_module modules/mod_wsgi.so
 5.
 graphite 配置
