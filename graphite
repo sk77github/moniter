@@ -94,6 +94,61 @@ Listen 13333
 WSGISocketPrefix run/wsgi
 //end graphite conf
 
+启动carbon
+#cd /opt/graphite/conf
+#cp carbon.conf.example carbon.conf 
+#cp storage-schemas.conf.example storage-schemas.conf
+#/opt/graphite/bin/carbon-cache.py start
+
+cluster:
+A机器
+conf/carbon.conf配置
+[relay]
+LINE_RECEIVER_INTERFACE = 0.0.0.0
+LINE_RECEIVER_PORT = 2003
+PICKLE_RECEIVER_INTERFACE = 0.0.0.0
+PICKLE_RECEIVER_PORT = 2004
+//2004端口在前面接收数据
+DESTINATIONS = xxx.xxx.xxx.xxx:2004, yyy.yyy.yyy.yyy:2004
+//打到两台远程机X和Y的relay上
+
+X机器
+conf/carbon.conf配置
+[relay]
+LINE_RECEIVER_INTERFACE = 0.0.0.0
+LINE_RECEIVER_PORT = 2003
+PICKLE_RECEIVER_INTERFACE = 0.0.0.0
+PICKLE_RECEIVER_PORT = 2004
+//relay端口2004接收A机器打来的数据
+DESTINATIONS = 127.0.0.1:2014:a, 127.0.0.1:2024:b
+//将relay 2004端口接收来的数据打到本机的多个carbon cache实例上
+LINE_RECEIVER_INTERFACE = 127.0.0.1
+PICKLE_RECEIVER_INTERFACE = 127.0.0.1
+CACHE_QUERY_INTERFACE = 127.0.0.1
+
+[cache:a]
+LINE_RECEIVER_PORT = 2013
+PICKLE_RECEIVER_PORT = 2014
+CACHE_QUERY_PORT = 7012
+
+[cache:b]
+LINE_RECEIVER_PORT = 2023
+PICKLE_RECEIVER_PORT = 2024
+CACHE_QUERY_PORT = 7022
+///本机启动多个carbon cache实例
+
+data/graphite/webapp/graphite/local_setting.py配置
+CARBONLINK_HOSTS = ["127.0.0.1:7012:a", "127.0.0.1:7022:b"]
+//本机graphite web接收本机多个carbon cache的数据
+
+Y机器配置与X机器配置相同
+
+Z机器（前端界面）配置
+CLUSTER_SERVERS = ["xxx.xxx.xxx.xxx:80", "yyy.yyy.yyy.yyy:80"]
+由X机器和Y机器组成graphite web集群
+
+
+
 
 
 
