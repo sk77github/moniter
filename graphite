@@ -35,7 +35,18 @@ This should be set in local_settings.py for better security
 #django-admin.py syncdb --settings=graphite.settings
 4.
 安装Apache及mod_wsgi
-yum install mod_wsgi （yum是基于Python2.6的安装，现在是Python2.7，所以不能用yum安装）httpd
+yum install mod_wsgi （yum是基于Python2.6的安装，现在是Python2.7，所以不能用yum安装mod_wsgi）
+yum install httpd
+安装WSGI：
+yum install httpd-devel（--with-apxs=apxs 需要）
+https://github.com/GrahamDumpleton/mod_wsgi/releases
+wget --no-check-certificate https://github.com/GrahamDumpleton/mod_wsgi/archive/4.4.21.tar.gz
+cd 到文件目录
+which Python 
+which apxs
+./configure --with-python=python目录 --with-apxs=apxs目录
+make
+make install
 Apache主配置加入 LoadModule wsgi_module modules/mod_wsgi.so
 5.
 graphite 配置
