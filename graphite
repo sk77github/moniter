@@ -11,9 +11,9 @@ graphite-web还不支持Python3，而Twisted requires Python 2.7 or later.
 1.
 按照https://github.com/sk77github/language/blob/master/Python-environment 安装Python环境
 2.
-pipxx.xx（版本号） install carbon
-pipxx.xx（版本号） install whisper
-pipxx.xx（版本号） install graphite-web
+#pipxx.xx（版本号） install carbon
+#pipxx.xx（版本号） install whisper
+#pipxx.xx（版本号） install graphite-web
 3.
 graphite配置
 ?: (1_6.W001) Some project unittests may not execute as expected.
@@ -24,7 +24,15 @@ See https://docs.djangoproject.com/en/dev/releases/1.6/#new-test-runner for more
 官方安装说明Django 1.4 or greater，http://graphite.readthedocs.org/en/latest/install.html
 这样看graphite-web可能基于django1.4
 ）
-
+#pip2.7 install 'django==1.4.22' 
+#pip install "django-tagging<0.4"
+//安装django1.4
+#cd /opt/graphite
+#export PYTHONPATH=$PYTHONPATH:`pwd`/webapp 
+/opt/graphite/webapp/graphite/settings.py:246: UserWarning: SECRET_KEY is set to an unsafe default. 
+This should be set in local_settings.py for better security
+#vim /opt/graphite/webapp/graphite/settings.py
+#django-admin.py syncdb --settings=graphite.settings
 
 
 
