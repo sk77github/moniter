@@ -14,6 +14,20 @@ graphite-web还不支持Python3，而Twisted requires Python 2.7 or later.
 #pipxx.xx（版本号） install carbon
 #pipxx.xx（版本号） install whisper
 #pipxx.xx（版本号） install graphite-web
+wget http://cairographics.org/releases/py2cairo-1.10.0.tar.bz2
+tar -jxvf py2cairo-1.10.0.tar.bz2
+./waf configure
+(
+wget http://cairographics.org/releases/cairo-1.10.0.tar.gz
+tar -zxvf cairo-1.10.0.tar.gz
+./configure
+make
+make install
+)
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+./waf configure
+./waf build
+./waf install
 3.
 启动graphite数据库
 ?: (1_6.W001) Some project unittests may not execute as expected.
