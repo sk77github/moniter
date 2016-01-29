@@ -1,0 +1,6 @@
+yum install -y git rpm-build python-configobj
+git clone https://github.com/python-diamond/Diamond
+cd Diamond
+make rpm
+cd dist
+rpm -ivh diamond-*.noarch.rpm
