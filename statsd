@@ -127,6 +127,19 @@ statsd 查看：
 网络，机器（操作系统级，硬件），应用代码，第三方API
 
 
+StatsD Metric Types:
+(
+http://code.flickr.net/2008/10/27/counting-timing/
+https://github.com/etsy/statsd/blob/master/docs/metric_types.md
+http://cookbook.logstash.net/recipes/statsd-metrics/
+http://blog.csdn.net/cnweike/article/details/30250483
+)
+Counting: increment metric    Statsd::increment($metricName);
+Timing:   timing metric       Statsd::timing($metricName, rand(5000, 10000000) / 1000);
+Gauges:   count metric        Statsd::gauge($metricName, rand(100, 500));
+
+
+
 
 
 
