@@ -139,6 +139,11 @@ Timing:   timing metric       Statsd::timing($metricName, rand(5000, 10000000) /
 Gauges:   count metric        Statsd::gauge($metricName, rand(100, 500));
 
 
+理解statsd的flush interval：
+default 10s，在这个flush interval下的per secondvalue。for example：
+If you have the default flush interval, 10 seconds, and send StatsD 7 increments on a counter with the flush interval,
+the counter would be 7 and the per-second value would be 0.7. No magic.
+
 
 
 
