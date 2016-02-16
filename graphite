@@ -484,3 +484,15 @@ Ganglia to send metrics directly to Graphite.
 Further integration work is underway.
 
 whisperctl 0.2.0	       A tool for managing Whisper databases used in Graphite.
+
+
+
+
+
+
+使用：
+如何向graphite发送数据：
+http://graphite.wikidot.com/getting-your-data-into-graphite
+
+自定义程序向graphite打点例子：
+graphite安装目录下的examples/example-client.py里
