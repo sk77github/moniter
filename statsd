@@ -133,8 +133,12 @@ http://code.flickr.net/2008/10/27/counting-timing/
 https://github.com/etsy/statsd/blob/master/docs/metric_types.md
 http://cookbook.logstash.net/recipes/statsd-metrics/
 http://blog.csdn.net/cnweike/article/details/30250483
+https://blog.pkhamre.com/understanding-statsd-and-graphite/
 )
 Counting: increment metric    Statsd::increment($metricName);
+If you have the default flush interval, 10 seconds, and send StatsD 7 increments on a counter with the flush interval,
+the counter would be 7 and the per-second value would be 0.7. No magic.
+
 Timing:   timing metric       Statsd::timing($metricName, rand(5000, 10000000) / 1000);
 Gauges:   count metric        Statsd::gauge($metricName, rand(100, 500));
 
