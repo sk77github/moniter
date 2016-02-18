@@ -90,7 +90,7 @@ filter{
         }
     }
 }
-添加了message字段和timestamp字段
+添加了message字段和timestamp字段，以及ip字段，log_level字段
 
  filter {
      if [type] == "op-trade" or [type] == "op-payment"  {
