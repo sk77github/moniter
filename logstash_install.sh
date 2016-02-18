@@ -75,3 +75,36 @@ output {
 
 graphite 访问：
 curl 100.106.15.7:8085/render?target=stats.logstash.host.laxin.exception\&from=-15min\&format=json
+
+
+
+logstash添加字段：
+
+filter{
+     if [type] == "php-activity-exception" {
+        grok {
+            match => {"message" => "(?<timestamp>%{YEAR}-%{MONTHNUM}-%{MONTHDAY}%{SPACE}%{HOUR}:?%{MINUTE}(?::?%{SECOND}))%{SPACE}\[(%{SYSLOGHOST:ip}|-)\]\[\-\]\[\-\]\[%{LOGLEVEL:log_level}\]\[(?<classname>.*?)\]%{SPACE}(?<content>(.|\r|\n)*)"}
+        }
+        date {
+            match => [ "timestamp" , "YYYY-MM-DD hh:mm:ss" ]
+        }
+    }
+}
+添加了message字段和timestamp字段
+
+ filter {
+     if [type] == "op-trade" or [type] == "op-payment"  {
+         if [status] == "0" {
+             mutate {
+                 add_field => ["human_status", "ok"]
+             }
+         }
+         else {
+             mutate {
+                 add_field => ["human_status", "fail"]
+             }
+         }
+     }
+ 
+  }
+添加了human_status字段
