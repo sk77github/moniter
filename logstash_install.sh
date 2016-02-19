@@ -2,15 +2,66 @@
 
 #自动化安装脚本
 #!/bin/bash
-cd /data/
+cd /data/ && mkdir logstash
 wget https://download.elastic.co/logstash/logstash/packages/centos/logstash-2.1.1-1.noarch.rpm
 rpm -ivh logstash-2.1.1-1.noarch.rpm
 rm -rf logstash-2.1.1-1.noarch.rpm
+
+chown -R logstash:logstash /data/logstash/  #服务安装后修改目录权限
+
+cat > /etc/sysconfig/logstash <<EOF
+###############################
+# Default settings for logstash
+###############################
+
+# Override Java location
+#JAVACMD=/usr/bin/java
+
+# Set a home directory
+#LS_HOME=/var/lib/logstash
+
+# Arguments to pass to logstash agent
+#LS_OPTS=""
+
+# Arguments to pass to java
+LS_HEAP_SIZE="2000m"
+
+# pidfiles aren't used for upstart; this is for sysv users.
+#LS_PIDFILE=/var/run/logstash.pid
+
+# user id to be invoked as; for upstart: edit /etc/init/logstash.conf
+#LS_USER=logstash
+
+# logstash logging
+#LS_LOG_FILE=/var/log/logstash/logstash.log
+#LS_USE_GC_LOGGING="true"
+
+# logstash configuration directory
+#LS_CONF_DIR=/etc/logstash/conf.d
+
+# Open file limit; cannot be overridden in upstart
+#LS_OPEN_FILES=16384
+
+# Nice level
+#LS_NICE=19
+
+# If this is set to 1, then when stop is called, if the process has
+# not exited within a reasonable time, SIGKILL will be sent next.
+# The default behavior is to simply log a message program stop failed; still running
+KILL_ON_STOP_TIMEOUT=0
+EOF
 
 #安装测试成功与否测试命令
 service logstash test
 
 #配置文件目录 /etc/logstash/conf.d/xxxxx.conf
+
+#配置服务的目录 
+######/etc/init.d/logstash#####
+#LS_HOME=/data/logstash
+#LS_LOG_DIR=/data/logstash
+
+
 #配置文件参考文档网址 https://www.elastic.co/guide/en/logstash/current/index.html
 
 
