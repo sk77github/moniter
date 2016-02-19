@@ -196,6 +196,7 @@ more threads than partitions means that some threads will be idle
         zk_connect => "100.xxx.xxx.xxx:2181,100.xxx.xxx.xxx:2181,100.xxx.xxx.xxx:2181"
         group_id =>"nginxlogGroup"
         consumer_threads => 3
+        codec => "plain"
     }
 
 
