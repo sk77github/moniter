@@ -176,3 +176,21 @@ you’ll want to use the multiline codec or filter.
 把当前行的数据添加到前面一行后面，，直到新进的当前行匹配 ^\[ 正则为止。
 
 The plugin keeps track of the current position in each file by recording it in a separate file named sincedb. 
+
+
+output:
+
+kafka:
+Write events to a Kafka topic. This uses the Kafka Producer API to write messages to a topic on the broker.
+The only required configuration is the topic name. The default codec is json, so events will be persisted on the broker in json format.
+If you select a codec of plain, Logstash will encode your messages with not only the message but also with a timestamp and hostname. 
+If you do not want anything but your message passing through, you should make the output configuration something like:
+    output {
+      kafka {
+        codec => plain {
+           format => "%{message}"
+        }
+      }
+    }
+For more information see http://kafka.apache.org/documentation.html#theproducer
+Kafka producer configuration: http://kafka.apache.org/documentation.html#newproducerconfigs
