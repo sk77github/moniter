@@ -163,7 +163,17 @@ filter{
 
 
 input：
+大多数input插件都会配置的configuration options：type
+Value type is string
+There is no default value for this setting.
+Add a type field to all events handled by this input.
+Types are used mainly for filter activation.
+The type is stored as part of the event itself, so you can also use the type to search for it in Kibana.
+If you try to set a type on an event that already has one (for example when you send an event from a shipper to an indexer) 
+then a new input will not override the existing type. A type set at the shipper stays with that event for its life even 
+when sent to another Logstash server.
 
+插件列表
 file：
 By default, each event is assumed to be one line. If you would like to join multiple log lines into one event, 
 you’ll want to use the multiline codec or filter.
