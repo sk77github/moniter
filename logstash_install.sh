@@ -159,3 +159,20 @@ filter{
  
   }
 添加了human_status字段
+
+
+
+input：
+
+file：
+By default, each event is assumed to be one line. If you would like to join multiple log lines into one event, 
+you’ll want to use the multiline codec or filter.
+例如：
+ codec => multiline {
+            pattern => "^\["
+            negate => true
+            what => "previous"
+        }
+把当前行的数据添加到前面一行后面，，直到新进的当前行匹配 ^\[ 正则为止。
+
+The plugin keeps track of the current position in each file by recording it in a separate file named sincedb. 
