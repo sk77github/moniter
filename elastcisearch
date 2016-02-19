@@ -1,2 +1,38 @@
 节点 是 Elasticsearch 运行的实例。集群 是一组有着同样cluster.name的节点，它们协同工作，互相分享数据，提供了故障转移和扩展的功能。
 当然一个节点也可以是一个集群。
+
+Elasticsearch的元素组成
+关系数据库     ⇒ 数据库 ⇒ 表    ⇒ 行    ⇒ 列(Columns)
+Elasticsearch  ⇒ 索引   ⇒ 类型  ⇒ 文档  ⇒ 字段(Fields)
+一个 Elasticsearch 集群可以包含多个 索引（数据库），也就是说其中包含了很多 类型（表）。这些类型中包含了很多的 文档（行），
+然后每个文档中又包含了很多的 字段（列）。
+例如：
+
+为了创建员工名单，我们需要进行如下操作：
+为每一个员工的 文档 创建索引，每个 文档 都包含了一个员工的所有信息。
+每个文档都会被标记为 employee 类型。
+这种类型将存活在 megacorp 这个 索引 中。
+这个索引将会存储在 Elasticsearch 的集群中
+在实际的操作中，这些操作是非常简单的（即使看起来有这么多步骤）。我们可以把如此之多的操作通过一个命令来完成：
+PUT /megacorp/employee/1
+{
+    "first_name" : "John",
+    "last_name" :  "Smith",
+    "age" :        25,
+    "about" :      "I love to go rock climbing",
+    "interests": [ "sports", "music" ]
+}
+注意在 /megacorp/employee/1 路径下，包含了三个部分：
+名字	内容
+megacorp	索引的名字
+employee	类型的名字
+1	        当前员工的ID
+
+
+
+
+安装：
+见elastcisearch_install.sh
+测试：
+curl 'http://localhost:9200/?pretty'
+curl -i -X GET 'http://localhost:9200/_count?pretty' 
