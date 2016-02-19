@@ -7,8 +7,8 @@ rpm -ivh elasticsearch-2.1.1.rpm
 rm -rf elasticsearch-2.1.1.rpm
 chkconfig --add elasticsearch
 cd /data && mkdir elasticsearch 
-cd /data/elasticsearch && mkdir elasticsearch_data
-chown -R elasticsearch:elasticsearch /data/elasticsearch/elasticsearch_data/
+cd /data/elasticsearch && mkdir elasticsearch_data && mkdir && mkdir elasticsearch_log
+chown -R elasticsearch:elasticsearch /data/elasticsearch/
 
 #####/etc/elasticsearch/elasticsearch.yml####
 #自动化配置文件脚本
@@ -66,8 +66,8 @@ cat > /etc/elasticsearch/elasticsearch.yml <<EOF
 # ---------------------------------- Network -----------------------------------
 #
 # Set the bind address to a specific IP (IPv4 or IPv6):
-#
- network.host: 0.0.0.0
+# 
+ network.host: xxx.xxx.xxx.xxx
 #
 # Set a custom port for HTTP:
 #
@@ -129,14 +129,14 @@ CONF_DIR=/etc/elasticsearch
 DATA_DIR=/data/elasticsearch/elasticsearch_data
 
 # Elasticsearch logs directory
-LOG_DIR=/var/log/elasticsearch
+LOG_DIR=/data/elasticsearch/elasticsearch_log
 
 # Elasticsearch PID directory
 PID_DIR=/var/run/elasticsearch
 
 # Heap size defaults to 256m min, 1g max
 # Set ES_HEAP_SIZE to 50% of available RAM, but no more than 31g
-ES_HEAP_SIZE=2g
+ES_HEAP_SIZE=31g
 
 # Heap new generation
 #ES_HEAP_NEWSIZE=
@@ -151,7 +151,7 @@ ES_HEAP_SIZE=2g
 #ES_RESTART_ON_UPGRADE=true
 
 # Path to the GC log file
-ES_GC_LOG_FILE=/var/log/elasticsearch/gc.log
+ES_GC_LOG_FILE=/data/elasticsearch/elasticsearch_log/gc.log
 
 ################################
 # Elasticsearch service
