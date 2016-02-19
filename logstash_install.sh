@@ -174,8 +174,19 @@ you’ll want to use the multiline codec or filter.
             what => "previous"
         }
 把当前行的数据添加到前面一行后面，，直到新进的当前行匹配 ^\[ 正则为止。
-
 The plugin keeps track of the current position in each file by recording it in a separate file named sincedb. 
+
+kafka:
+This input will read events from a Kafka topic. It uses the high level consumer API provided by Kafka to read messages from the broker.
+It also maintains the state of what has been consumed using Zookeeper. The default input codec is json
+Ideally you should have as many threads as the number of partitions for a perfect balance 
+more threads than partitions means that some threads will be idle
+ kafka {
+        topic_id => "nginxlog"
+        zk_connect => "100.xxx.xxx.xxx:2181,100.xxx.xxx.xxx:2181,100.xxx.xxx.xxx:2181"
+        group_id =>"nginxlogGroup"
+        consumer_threads => 3
+    }
 
 
 output:
@@ -190,7 +201,31 @@ If you do not want anything but your message passing through, you should make th
         codec => plain {
            format => "%{message}"
         }
+        bootstrap_servers => "xxx.xxx.xxx.3:9092, xxx.xxx.xxx.3:9092, xxx.xxx.xxx.3:9092"
+        topic_id => "log4jlog"
       }
     }
 For more information see http://kafka.apache.org/documentation.html#theproducer
 Kafka producer configuration: http://kafka.apache.org/documentation.html#newproducerconfigs
+
+
+Codec:
+    
+plain:
+The "plain" codec is for plain text with no delimiting between events.
+This is mainly useful on inputs and outputs that already have a defined framing in their transport protocol (such as 
+zeromq, rabbitmq, redis, etc)
+
+multiline:
+The original goal of this codec was to allow joining of multiline messages from files into a single event. For example, 
+joining Java exception and stacktrace messages into a single event.
+The config looks like this:
+input {
+  stdin {
+    codec => multiline {
+      pattern => "pattern, a regexp"
+      negate => "true" or "false"
+      what => "previous" or "next"
+    }
+  }
+}
