@@ -1,4 +1,3 @@
-
 #安装 zookeeper  版本 3.4.6 
 
 #自动化安装脚本
@@ -231,16 +230,23 @@ echo "set  [/data/kafka/config/server.properties] param broker.id host.name=ip,a
 #kafka 停止命令
 /data/kafka/bin/kafka-server-stop.sh 
 
+#kafka 查看所有topic
+/data/kafka/bin/kafka-topics.sh --zookeeper localhost:2181 --list
+
 #创建topic命令
-/data/kafka/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor M --partitions N --topic topicName
+/data/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor M --partitions N --topic topicName
 #命令说明 
   M 为该topic创建的备份数据份数  允许出错的节点为 M - 1 
   N 为该topic的分区的个数 
   name topic的名字
 
-#删除topic命令
-/data/kafka/kafka-topics.sh --zookeeper localhost:2181 --delete --topic topicName
+#删除topic命令 *****谨慎使用***** 
+/data/kafka/bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic topicName
 
 
 #消费topic数据
 /data/kafka/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic topicName
+
+#查看topic的偏移量
+/data/kafka/bin/kafka-consumer-offset-checker.sh --zookeeper localhost:2181 --group GroupName --topic topicName
+
