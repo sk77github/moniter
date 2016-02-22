@@ -234,7 +234,7 @@ If you do not want anything but your message passing through, you should make th
         codec => plain {
            format => "%{message}"
         }
-        bootstrap_servers => "xxx.xxx.xxx.3:9092, xxx.xxx.xxx.3:9092, xxx.xxx.xxx.3:9092"
+        bootstrap_servers => "xxx.xxx.xxx.1:9092, xxx.xxx.xxx.2:9092, xxx.xxx.xxx.3:9092"
         topic_id => "log4jlog"
       }
     }
