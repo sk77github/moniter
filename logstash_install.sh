@@ -242,6 +242,32 @@ If you do not want anything but your message passing through, you should make th
 For more information see http://kafka.apache.org/documentation.html#theproducer
 Kafka producer configuration: http://kafka.apache.org/documentation.html#newproducerconfigs
 
+elasticsearch：
+document_type
+Value type is string
+There is no default value for this setting.
+The document type to write events to. Generally you should try to write only similar events to the same type. 
+String expansion %{foo} works here. Unless you set document_type, the event type will be used if it exists otherwise the document type
+will be assigned the value of logs
+
+hosts
+Value type is array
+Default value is ["127.0.0.1"]
+Sets the host(s) of the remote instance. If given an array it will load balance requests across the hosts specified in 
+the hosts parameter. Remember the http protocol uses the http address (eg. 9200, not 9300).
+["127.0.0.1:9200","127.0.0.2:9200"]
+
+index
+Value type is string
+Default value is "logstash-%{+YYYY.MM.dd}"
+The index to write events to. This can be dynamic using the %{foo} syntax. The default value will partition your indices by day 
+so you can more easily delete old data or only search specific date ranges. Indexes may not contain uppercase characters. 
+For weekly indexes ISO 8601 format is recommended, eg. logstash-%{+xxxx.ww}
+
+配置例子：
+elasticsearch {
+            hosts => ["100.106.15.1:9200","100.106.15.2:9200","100.106.15.3:9200","100.106.15.6:9200","100.106.15.7:9200","100.106.15.9:9200"]
+    }
 
 Codec:
     
