@@ -192,6 +192,16 @@ input {
         path => [ "/data/testLog/test.log*" ]
     }
 }
+file input 配置项：
+start_positionedit
+Value can be any of: beginning, end
+Default value is "end"
+Choose where Logstash starts initially reading files: at the beginning or at the end. 
+The default behavior treats files like live streams and thus starts at the end. 
+If you have old data you want to import, set this to beginning.
+This option only modifies "first contact" situations where a file is new and not seen before,
+i.e. files that don’t have a current position recorded in a sincedb file read by Logstash.
+If a file has already been seen before, this option has no effect and the position recorded in the sincedb file will be used.
 
 kafka:
 This input will read events from a Kafka topic. It uses the high level consumer API provided by Kafka to read messages from the broker.
