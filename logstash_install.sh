@@ -219,6 +219,7 @@ more threads than partitions means that some threads will be idle
         group_id =>"nginxlogGroup"
         consumer_threads => 3
         codec => "plain"
+        type => ""
     }
 
 
