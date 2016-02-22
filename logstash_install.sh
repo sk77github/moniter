@@ -185,6 +185,13 @@ you’ll want to use the multiline codec or filter.
         }
 把当前行的数据添加到前面一行后面，，直到新进的当前行匹配 ^\[ 正则为止。
 The plugin keeps track of the current position in each file by recording it in a separate file named sincedb. 
+file input 例子：
+input {
+    file {
+        type => "testType"
+        path => [ "/data/testLog/test.log*" ]
+    }
+}
 
 kafka:
 This input will read events from a Kafka topic. It uses the high level consumer API provided by Kafka to read messages from the broker.
