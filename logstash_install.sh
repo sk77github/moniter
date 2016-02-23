@@ -10,6 +10,8 @@ chown -R logstash:logstash /data/logstash/  #服务安装后修改目录权限
 chown -R logstash:logstash /var/log/logstash/  
 这里的权限问题要注意
 
+logstash需要java环境  需要确保/usr/bin/java存在可执行
+
 cat > /etc/sysconfig/logstash <<EOF
 ###############################
 # Default settings for logstash
