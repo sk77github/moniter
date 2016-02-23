@@ -12,3 +12,4 @@ NGINX_UPSTREAM_FORMAT %{IPORHOST:http_host} %{IPORHOST:clientip} \[%{HTTPDATE:ti
 upstream_time:float}
 NGINX_FORMAT %{IPORHOST:http_host} %{IPORHOST:clientip} \[%{HTTPDATE:timestamp}\] \"(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawreque
 st})\" %{NUMBER:response} (?:%{NUMBER:bytes}|-) %{QS:referrer} %{QS:agent} %{QS:x_forword} (%{URIHOST:upstream_host}|-) %{NUMBER:request_time:float}
+注意上面的屏幕复制结尾处可能带了隐藏的换行符
