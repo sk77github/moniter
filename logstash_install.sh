@@ -290,6 +290,8 @@ If you do not want anything but your message passing through, you should make th
     }
 For more information see http://kafka.apache.org/documentation.html#theproducer
 Kafka producer configuration: http://kafka.apache.org/documentation.html#newproducerconfigs
+需要先在kafka上创建好topic，命令如下
+bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic enterprise-ng-log --partitions 3 --replication-factor 2  
 
 elasticsearch：
 document_type
