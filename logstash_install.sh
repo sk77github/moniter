@@ -5,7 +5,6 @@
 cd /data/ && mkdir logstash
 wget https://download.elastic.co/logstash/logstash/packages/centos/logstash-2.1.1-1.noarch.rpm
 rpm -ivh logstash-2.1.1-1.noarch.rpm
-rm -rf logstash-2.1.1-1.noarch.rpm
 
 chown -R logstash:logstash /data/logstash/  #服务安装后修改目录权限
 
