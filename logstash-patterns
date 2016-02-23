@@ -1,0 +1,14 @@
+nginx:
+
+NGUSERNAME [a-zA-Z\.\@\-\+_%]+
+NGUSER %{NGUSERNAME}
+URIPARAM_NOASK [A-Za-z0-9$.+!*'|(){},~@#%&/=:;_?\-\[\]]*
+
+NGINX_SPLIT_REQ_FORMAT %{IPORHOST:http_host}%{SPACE}%{IPORHOST:clientip}%{SPACE}\[%{HTTPDATE:timestamp}\]%{SPACE}\"%{WORD:verb}%{SPACE}%{URIPATH:request}(?:\?%{URIPARA
+M_NOASK:param})?%{SPACE}HTTP/%{NUMBER:httpversion}\"%{SPACE}%{NUMBER:response}%{SPACE}(?:%{NUMBER:bytes}|-)%{SPACE}%{QS:referrer}%{SPACE}%{QS:agent}%{SPACE}%{QS:x_forw
+ord}%{SPACE}(%{URIHOST:upstream_host}|-)%{SPACE}%{NUMBER:request_time:float}%{SPACE}%{NUMBER:upstream_time:float}
+NGINX_UPSTREAM_FORMAT %{IPORHOST:http_host} %{IPORHOST:clientip} \[%{HTTPDATE:timestamp}\] \"(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA
+:rawrequest})\" %{NUMBER:response} (?:%{NUMBER:bytes}|-) %{QS:referrer} %{QS:agent} %{QS:x_forword} (%{URIHOST:upstream_host}|-) %{NUMBER:request_time:float} %{NUMBER:
+upstream_time:float}
+NGINX_FORMAT %{IPORHOST:http_host} %{IPORHOST:clientip} \[%{HTTPDATE:timestamp}\] \"(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawreque
+st})\" %{NUMBER:response} (?:%{NUMBER:bytes}|-) %{QS:referrer} %{QS:agent} %{QS:x_forword} (%{URIHOST:upstream_host}|-) %{NUMBER:request_time:float}
