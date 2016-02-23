@@ -245,7 +245,6 @@ If you need to match multiple patterns against a single field, the value can be 
 filter {
   grok { match => { "message" => [ "Duration: %{NUMBER:duration}", "Speed: %{NUMBER:speed}" ] } }
 }
-
 patterns_dir
 Value type is array
 Default value is []
@@ -257,11 +256,18 @@ Pattern files are plain text with format:
 NAME PATTERN
 For example:
 NUMBER \d+
-
 tag_on_failure
 Value type is array
 Default value is ["_grokparsefailure"]
 Append values to the tags field when there has been no successful match
+
+
+date
+The date filter is used for parsing dates from fields, and then using that date or timestamp as the logstash timestamp for the event.
+配置例子
+date {
+        match => [ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
+    }
 
 
 output:
