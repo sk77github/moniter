@@ -246,6 +246,23 @@ filter {
   grok { match => { "message" => [ "Duration: %{NUMBER:duration}", "Speed: %{NUMBER:speed}" ] } }
 }
 
+patterns_dir
+Value type is array
+Default value is []
+Logstash ships by default with a bunch of patterns, so you don’t necessarily need to define this yourself unless
+you are adding additional patterns. You can point to multiple pattern directories using this setting Note that Grok
+will read all files in the directory and assume its a pattern file (including any tilde backup files)
+patterns_dir => ["/opt/logstash/patterns", "/opt/logstash/extra_patterns"]
+Pattern files are plain text with format:
+NAME PATTERN
+For example:
+NUMBER \d+
+
+tag_on_failure
+Value type is array
+Default value is ["_grokparsefailure"]
+Append values to the tags field when there has been no successful match
+
 
 output:
 
