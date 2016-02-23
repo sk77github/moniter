@@ -160,6 +160,7 @@ filter{
 添加了human_status字段
 
 
+重要的可查询的概念：field，type，tag
 
 input：
 大多数input插件都会配置的configuration options：type
@@ -220,6 +221,15 @@ more threads than partitions means that some threads will be idle
         codec => "plain"
         type => ""
     }
+
+
+
+filter:
+
+grok
+Logstash ships with about 120 patterns by default. You can find them here: 
+https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns. 
+You can add your own trivially. (See the patterns_dir setting)
 
 
 output:
