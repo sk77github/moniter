@@ -230,6 +230,19 @@ grok
 Logstash ships with about 120 patterns by default. You can find them here: 
 https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns. 
 You can add your own trivially. (See the patterns_dir setting)
+配置选项
+match
+Value type is hash
+Default value is {}
+A hash of matches of field ⇒ value
+For example:
+filter {
+  grok { match => { "message" => "Duration: %{NUMBER:duration}" } }
+}
+If you need to match multiple patterns against a single field, the value can be an array of patterns
+filter {
+  grok { match => { "message" => [ "Duration: %{NUMBER:duration}", "Speed: %{NUMBER:speed}" ] } }
+}
 
 
 output:
