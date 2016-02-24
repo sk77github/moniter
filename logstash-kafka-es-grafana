@@ -1,3 +1,5 @@
+基于logstash，kafka，elasticsearch，grafana的日志监控
+
 需要先在kafka上创建topic
 bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic enterprise-ng-log --partitions 3 --replication-factor 2  
 查看某个topic的分布情况
