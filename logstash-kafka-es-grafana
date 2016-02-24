@@ -1,0 +1,82 @@
+需要先在kafka上创建topic
+bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic enterprise-ng-log --partitions 3 --replication-factor 2  
+查看某个topic的分布情况
+bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
+
+logstash shipper配置start：
+input {
+  file {
+        type => "enterprise-ng-log"
+        path => [ "/data/logs/access.log" ]
+     }
+}
+
+filter {
+    if [type] == "enterprise-ng-log" {
+        grok {
+            match => ["message", "%{NGINX_FORMAT}"]
+            patterns_dir => "/etc/logstash/patterns"
+        }
+        date {
+            match => [ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
+        }
+    }
+}
+
+output {
+  if [type] == "enterprise-ng-log" {
+    kafka {
+        bootstrap_servers => "xxx.xxx.xxx.xxx:9092, xxx.xxx.xxx.xxx:9092, xxx.xxx.xxx.xxx:9092"
+        topic_id => "enterprise-ng-log"
+      }
+  }
+}
+//配置end
+
+/etc/logstash/patterns里面是名为nginx的文件，文件内容为：
+NGUSERNAME [a-zA-Z\.\@\-\+_%]+
+NGUSER %{NGUSERNAME}
+URIPARAM_NOASK [A-Za-z0-9$.+!*'|(){},~@#%&/=:;_?\-\[\]]*
+
+NGINX_SPLIT_REQ_FORMAT %{IPORHOST:http_host}%{SPACE}%{IPORHOST:clientip}%{SPACE}\[%{HTTPDATE:timestamp}\]%{SPACE}\"%{WORD:verb}%{SPACE}%{URIPATH:request}(?:\?%{URIPARA
+M_NOASK:param})?%{SPACE}HTTP/%{NUMBER:httpversion}\"%{SPACE}%{NUMBER:response}%{SPACE}(?:%{NUMBER:bytes}|-)%{SPACE}%{QS:referrer}%{SPACE}%{QS:agent}%{SPACE}%{QS:x_forw
+ord}%{SPACE}(%{URIHOST:upstream_host}|-)%{SPACE}%{NUMBER:request_time:float}%{SPACE}%{NUMBER:upstream_time:float}
+NGINX_UPSTREAM_FORMAT %{IPORHOST:http_host} %{IPORHOST:clientip} \[%{HTTPDATE:timestamp}\] \"(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA
+:rawrequest})\" %{NUMBER:response} (?:%{NUMBER:bytes}|-) %{QS:referrer} %{QS:agent} %{QS:x_forword} (%{URIHOST:upstream_host}|-) %{NUMBER:request_time:float} %{NUMBER:
+upstream_time:float}
+NGINX_FORMAT %{IPORHOST:http_host} %{IPORHOST:clientip} \[%{HTTPDATE:timestamp}\] \"(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawreque
+st})\" %{NUMBER:response} (?:%{NUMBER:bytes}|-) %{QS:referrer} %{QS:agent} %{QS:x_forword} (%{URIHOST:upstream_host}|-) %{NUMBER:request_time:float}
+注意上面的屏幕复制结尾处可能带了隐藏的换行符
+
+从头消费某个topic，在终端显示出来，这样可以当成是查看某个topic下的数据
+bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic enterprise-ng-log --from-beginning
+
+logstash indexer配置 start：
+input{
+    kafka {
+        topic_id => "enterprise-ng-log"
+        zk_connect => "xxx.xxx.xxx.xxx:2181,xxx.xxx.xxx.xxx:2181,xxx.xxx.xxx.xxx:2181"
+        group_id =>"enterprise-ng-log-Group"
+        consumer_threads => 3
+    }
+}
+output {
+    if "_grokparsefailure" in [tags] {
+        file {
+            path => "/data/logstash/grok-failure-%{+YYYY-MM-dd}.log"
+        }
+    }
+    else if "_jsonparsefailure" in [tags] {
+        file {
+            path => "/data/logstash/json-failure-%{+YYYY-MM-dd}.log"
+        }
+    }
+   else {
+        elasticsearch {
+            index => "logstash-%{+YYYY-MM-dd}"
+            hosts => ["xxx.xxx.xxx.xxx:9200","xxx.xxx.xxx.xxx:9200","xxx.xxx.xxx.xxx:9200","xxx.xxx.xxx.xxx:9200""]
+        }
+   }
+
+}
+//配置end
