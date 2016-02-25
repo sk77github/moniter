@@ -1,0 +1,2 @@
+logstash从kafka消费数据  然后output给ES，集群ES的一个机器触发了GC，导致ES集群吞吐量下降。
+而logstash index input是kafka，output是ES，ES吞吐量下降，以致logstash index output变慢，以致消费kafka变慢。
