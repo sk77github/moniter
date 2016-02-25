@@ -1,0 +1,18 @@
+#kafka collector 依赖于 MX4J 
+#http://mvnrepository.com/artifact/mx4j/mx4j-tools/3.0.1
+#下载 mx4j-tools-3.0.1.jar 到 /data/kafka/libs目录下
+#cd /data/kafka/libs/ && wget http://central.maven.org/maven2/mx4j/mx4j-tools/3.0.1/mx4j-tools-3.0.1.jar
+#在每个kafka的broker上创建kafka的collector 
+
+#####diamond-setup -C KafkaCollector#####
+
+cat > /etc/diamond/collectors/KafkaCollector.conf <<EOF
+enabled = True
+path_suffix = ""
+ttl_multiplier = 2
+measure_collector_time = False
+byte_unit = byte,
+host = 127.0.0.1
+port = 8082
+
+EOF
