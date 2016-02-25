@@ -1,0 +1,1 @@
+logstash  input里  或者 output里   有多个输入或者输出并列，然后这个启动的logstash进程如何处理他们呢？
