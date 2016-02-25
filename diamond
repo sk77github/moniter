@@ -1,3 +1,24 @@
+diamond系统监控
+
+#diamond的启动
+service diamond start
+#diamond的停止
+service diamond stop
+#diamond的状态查看
+service diamond status
+#diamond查看某个collector是否收集
+diamond-setup --print -C CollectorName
+#diamond创建一个collector （/etc/diamond/collectors/会生成相应的CollectorName.conf)
+#此外也可以自己定义collector 参考 http://diamond.readthedocs.org/en/latest/Getting-Started/Custom-Collectors/
+diamond-setup -C CollectorName
+
+###同一台机器有不同的python版本时候 pip install 是推荐的方式#####
+
+
+
+
+
+
 wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
 python ez_setup.py
 yum install -y git rpm-build python-configobj
