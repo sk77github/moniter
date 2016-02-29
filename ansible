@@ -1,0 +1,8 @@
+Ansible by default manages machines over the SSH protocol.
+
+On the managed nodes, you need a way to communicate, normally ssh. By default this uses sftp, if not available you can switch to scp in ansible.cfg.
+Also you need Python 2.4 or later, but if you are running less than Python 2.5 on the remotes, you will also need: python-simplejson
+
+安装：
+yum安装：yum install ansible
+pip安装：pip install ansible
