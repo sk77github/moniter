@@ -5,10 +5,18 @@ Any management system benefits from being run near the machines being managed.
 If you are running Ansible in a cloud, consider running it from a machine inside that cloud. 
 In most cases this will work better than on the open Internet.
 
-On the managed nodes, you need a way to communicate, normally ssh. By default this uses sftp, if not available you can switch to scp in ansible.cfg.
+On the managed nodes, you need a way to communicate, normally ssh. By default this uses sftp, 
+if not available you can switch to scp in ansible.cfg.
 Also you need Python 2.4 or later, but if you are running less than Python 2.5 on the remotes, you will also need: python-simplejson
+远程机需要安装Python，执行which Python时 需要能找的到，比如/usr/bin/python
 
 安装：
 yum安装：yum install ansible（亲测，yum安装ansible-1.9.4）
 pip安装：pip install ansible（亲测，pip安装ansible-2.0.1.0）
 pip安装Python程序更好些？
+
+使用：
+Edit (or create) /etc/ansible/hosts and put one or more remote systems in it. 
+Your public SSH key should be located in authorized_keys on those systems（先配置好ssh直接登录）
+Now ping all your nodes:
+$ ansible all -m ping
