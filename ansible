@@ -18,5 +18,7 @@ pip安装Python程序更好些？
 使用：
 Edit (or create) /etc/ansible/hosts and put one or more remote systems in it. 
 Your public SSH key should be located in authorized_keys on those systems（先配置好ssh直接登录）
-Now ping all your nodes:
+Now ping all your nodes:         
 $ ansible all -m ping
+
+$ ansible all -m ping -u bruce        -u参数 指定特定的用户在远程机执行 
