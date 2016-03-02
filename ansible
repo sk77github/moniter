@@ -1,4 +1,9 @@
 Ansible by default manages machines over the SSH protocol.
+When speaking with remote machines, Ansible by default assumes you are using SSH keys. 
+
+Any management system benefits from being run near the machines being managed. 
+If you are running Ansible in a cloud, consider running it from a machine inside that cloud. 
+In most cases this will work better than on the open Internet.
 
 On the managed nodes, you need a way to communicate, normally ssh. By default this uses sftp, if not available you can switch to scp in ansible.cfg.
 Also you need Python 2.4 or later, but if you are running less than Python 2.5 on the remotes, you will also need: python-simplejson
