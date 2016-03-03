@@ -15,6 +15,19 @@ yum安装：yum install ansible（亲测，yum安装ansible-1.9.4）
 pip安装：pip install ansible（亲测，pip安装ansible-2.0.1.0）
 pip安装Python程序更好些？
 
+ansible主要可执行程序和配置：
+[root@host]# rpm -ql ansible | grep -v /usr/lib | grep -v /usr/share
+/etc/ansible
+/etc/ansible/ansible.cfg
+/etc/ansible/hosts
+/etc/ansible/roles
+/usr/bin/ansible
+/usr/bin/ansible-doc
+/usr/bin/ansible-galaxy
+/usr/bin/ansible-playbook
+/usr/bin/ansible-pull
+/usr/bin/ansible-vault
+
 使用：
 Edit (or create) /etc/ansible/hosts and put one or more remote systems in it. 
 Your public SSH key should be located in authorized_keys on those systems（先配置好ssh直接登录）
@@ -22,3 +35,11 @@ Now ping all your nodes:
 $ ansible all -m ping
 
 $ ansible all -m ping -u bruce        -u参数 指定特定的用户在远程机执行 
+
+命令结构：
+ansible <pattern_goes_here> -m <module_name> -a <arguments>
+例如：
+ansible webservers -m service -a "name=httpd state=restarted"
+
+to use Ansible, you’ll first need to know how to tell Ansible which hosts in your inventory to talk to. 
+This is done by designating particular host names or groups of hosts.
