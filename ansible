@@ -28,6 +28,22 @@ ansible主要可执行程序和配置：
 /usr/bin/ansible-pull
 /usr/bin/ansible-vault
 
+/etc/ansible/roles
+roles 目录下是各个应用的目录名称，各目录以应用名称命令，这个名称可以自定义，但最好是设置一个有意义的名称，例如 mysql
+mysql 命令下包括了 defaults、handlers、meta、tasks、templates、vars 目录，分别对应不同的功能，
+这几个目录的命名都是 Ansible 官方定义好的，不可以修改，各目录功能说明如下。
+默认 Ansible 只处理各目录下文件名为 main.yml 中定义的操作，如果您有多个文件，可以在 main.yml 文件中 include 其它文件。
+目录名	说明
+defaults	默认变量存放目录
+handlers	处理程序（当发生改变时需要执行的操作）
+meta	    角色依赖关系处理
+tasks	    具体执行的任务操作定义
+templates	模板文件存放目录
+vars	    变量文件目录
+
+
+
+
 使用：
 Edit (or create) /etc/ansible/hosts and put one or more remote systems in it. 
 Your public SSH key should be located in authorized_keys on those systems（先配置好ssh直接登录）
@@ -57,6 +73,13 @@ ansible all -m file -a "dest=/tmp/hbase/config state=absent" 删除文件
 ansible all -m service -a "name=httpd state=restarted"       在所有机器上重启httpd服务
 
 注意以上这些命令里的-m参数，指定模块，state说明状态，这是ansible的设计理念
+
+
+
+ansible执行模型：
+task list中的各任务按次序逐个在hosts中指定的所有主机上执行，即在所有主机上完成第一个任务后再开始第二个。
+在顺序运行某playbook时，如果中途发生错误，所有已执行任务都将回滚，因此，在修改playbook后重新执行一次即可
+是这样吗？
 
 
 
