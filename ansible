@@ -41,5 +41,25 @@ ansible <pattern_goes_here> -m <module_name> -a <arguments>
 例如：
 ansible webservers -m service -a "name=httpd state=restarted"
 
+命令结构说明：
 to use Ansible, you’ll first need to know how to tell Ansible which hosts in your inventory to talk to. 
 This is done by designating particular host names or groups of hosts.
+
+the default module name is ‘command’
+The command - Executes a command on a remote node module does not support shell variables and things like piping. 
+If we want to execute a module using a shell, use the ‘shell’ module instead. 
+例如：
+ansible all -m shell -a 'go env | grep GOPATH'              列出所有机器的gopath
+ansible all -m copy -a "src=/etc/hosts dest=/tmp/hosts"     将etc目录下的hosts文件分发到所有机器的tmp目录下
+ansible all -m file -a "dest=/tmp/hosts mode=600 owner=hadoop group=hadoop"   更改文件的属主和权限
+ansible all -m file -a "dest=/tmp/hbase/config mode=755 owner=hadoop group=hadoop state=directory"   创建递归目录 类似 mkdir -p
+ansible all -m file -a "dest=/tmp/hbase/config state=absent" 删除文件
+ansible all -m service -a "name=httpd state=restarted"       在所有机器上重启httpd服务
+
+注意以上这些命令里的-m参数，指定模块，state说明状态，这是ansible的设计理念
+
+
+
+ansible设计理念：
+make the remote system look like a state, and run the commands necessary to get it there.
+This is commonly referred to as ‘idempotence’, and is a core design goal of Ansible. 
