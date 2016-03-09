@@ -12,7 +12,7 @@ Also you need Python 2.4 or later, but if you are running less than Python 2.5 o
 
 安装：
 yum安装：yum install ansible（亲测，yum安装ansible-1.9.4）
-pip安装：pip install ansible（亲测，pip安装ansible-2.0.1.0）
+pip安装：pip install ansible（亲测，pip安装ansible-2.0.1.0,pip方式安装不会再etc目录下建立ansible配置目录，需要手动建立）
 pip安装Python程序更好些？
 
 ansible主要可执行程序和配置：
