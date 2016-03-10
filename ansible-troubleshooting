@@ -1,0 +1,7 @@
+1,'module' object has no attribute 'HAVE_DECL_MPZ_POWM_SEC'
+
+My guess is that you have the python-crypto-2.0.1 RPM installed system-wide, and you didn't have gmp-devel installed when 
+you built & installed a later version of PyCrypto, so you'reusing a newer version of PyCrypto with an older version of _fastmath.
+You may try to do as suggested: install the gmp-devel package and then PyCrypto with pip.
+
+参考地址：http://stackoverflow.com/questions/20881768/fastmath-error-in-python-have-decl-mpz-powm-sec
