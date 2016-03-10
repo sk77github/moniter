@@ -6,7 +6,10 @@ You may try to do as suggested: install the gmp-devel package and then PyCrypto 
 
 参考地址：http://stackoverflow.com/questions/20881768/fastmath-error-in-python-have-decl-mpz-powm-sec
 
+
+
 2,You should rebuild using libgmp >= 5 to avoid timing attack
+
 问题环境
 Python2.6.6 机器自带的yum安装
 机器没有安装pip
@@ -23,7 +26,25 @@ gmp-4.3.1-7.el6_2.2.x86_64
 pycrypto-2.6.1（目前测试机没有pycrypto-2.0 版本，但最开始的出现问题的机器已存在pycrypto-2.0版本，pip install ansible时
 自动升到了pycrypto-2.6.1，但didn't have gmp-devel installed）
 （
-执行以下两个初始命令后，复现不了了，必要的库已经安装了？
+执行以下两个初始命令后，在测试机复现不了了，必要的库已经安装了？
    yum -y groupinstall "Development tools"
    yum install zlib-devel bzip2-devel openssl-devel ncurses-devel zx-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel python-devel libffi-devel libxml2-devel openssl-devel libxslt-devel gcc libgcc glibc
 ）
+但问题机器仍然存在，执行以下操作：
+download the sources from https://gmplib.org/#DOWNLOAD
+
+According to the instructions from the package:
+tar -xvjpf gmp-6.0.0a.tar.bz2
+./configure 
+make 
+make check <= VERY IMPORTANT!! 
+make install 
+
+With the right libraries we rebuild PyCrypto
+pip install --ignore-installed PyCrypto 
+
+问题解决
+tips：关于包，以及依赖的管理，除了使用yum进行安装适配相关包，以及使用rpm进行安装适配相关包，有时还需要使用源码下载后进行编译安装适配
+      并做好编译配置
+
+参考地址：https://ask.openstack.org/en/question/28335/you-should-rebuild-using-libgmp-5-to-avoid-timing-attack-vulnerability-_warnnot-using-mpz_powm_sec-you-should-rebuild-using-libgmp-5-to-avoid-timing/
