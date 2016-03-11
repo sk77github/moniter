@@ -32,3 +32,10 @@ echo $GOPATH
 获取grafana源码
 go get github.com/grafana/grafana
 
+
+
+
+
+
+
+
