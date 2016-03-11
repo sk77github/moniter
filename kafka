@@ -21,6 +21,10 @@ bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
 从头消费某个topic，在终端显示出来，这样可以当成是查看某个topic下的数据
 bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic enterprise-ng-log --from-beginning
 
+查看topic在某个offset的message
+/data/kafka/bin/kafka-simple-consumer-shell.sh --topic nginxlog --broker-list xxx.xxx.xxx.x:9092,xxx.xxx.xxx.x:9092,xxx.xxx.xxx.x:9092 
+                                               --partition 0 --offset 395702521 --max-messages 10  --print-offsets 
+
 动态更改topic配置
 > bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic my-topic
     --config max.message.bytes=128000
