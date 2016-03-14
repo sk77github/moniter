@@ -51,6 +51,8 @@ GET /megacorp/employee/1
 GET /megacorp/employee/_search                      搜索全部文档
 curl 'http://xxx.xxx.xxx.xxx:9200/_search?q=type:enterprise-ng-log'   查询某个type下的全部文档
 GET /megacorp/employee/_search?q=last_name:Smith    根据字段搜索文档
+curl 'http://xxx.xxx.xxx.xxx:9200/logstash-yw-enterprise-2016-03-14(index)/_search?q=category:activity-user-getuserinfo&pretty'
+查询index为logstash-yw-enterprise-2016-03-14下的字段category等于activity-user-getuserinfo的所有文档
 
 
 安装：
