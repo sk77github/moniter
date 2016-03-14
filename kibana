@@ -1,0 +1,6 @@
+install:
+Download and unzip Kibana 4
+Extract your archive 
+Open config/kibana.yml in an editor Set the elasticsearch.url to point at your Elasticsearch instance 
+Run ./bin/kibana
+Point your browser at http://yourhost.com:5601
