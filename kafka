@@ -18,6 +18,9 @@ test
 查看某个topic的分布情况
 bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
 
+#查看topic的偏移量，也就是消费情况
+/data/kafka/bin/kafka-consumer-offset-checker.sh --zookeeper localhost:2181 --group GroupName --topic topicName
+
 从头消费某个topic，在终端显示出来，这样可以当成是查看某个topic下的数据
 bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic enterprise-ng-log --from-beginning
 
