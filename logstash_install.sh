@@ -82,6 +82,8 @@ service logstash stop
 非服务方式时的关闭和启动
 关闭命令
 kill -15 pid
+测试配置命令
+/opt/logstash/bin/logstash -f /data/logstash/conf/logstash-indexer-enterprise.conf --configtest
 启动命令
 /opt/logstash/bin/logstash agent -f ${LS_CONF_DIR} -l ${LS_LOG_FILE} ${LS_OPTS}
 重启命令
