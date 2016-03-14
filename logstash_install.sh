@@ -68,17 +68,29 @@ service logstash test
 #配置文件参考文档网址 https://www.elastic.co/guide/en/logstash/current/index.html
 
 
+
+
+logstash管理：
+
 #脚本配置成功后测试命令
 service logstash configtest
-
 #logstash 启动命令
 service logstash start
-
 #logstash 停止命令
 service logstash stop
 
+非服务方式时的关闭和启动
+关闭命令
+kill -15 pid
+启动命令
+/opt/logstash/bin/logstash agent -f ${LS_CONF_DIR} -l ${LS_LOG_FILE} ${LS_OPTS}
+重启命令
+先关闭再启动
 
 
+
+
+logstash配置：
 
 //shiper  配置  start
 input {
