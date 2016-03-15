@@ -170,6 +170,11 @@ CLUSTER_SERVERS = ["xxx.xxx.xxx.xxx:80", "yyy.yyy.yyy.yyy:80"]
 由X机器和Y机器组成graphite web集群
 
 
+web访问：
+curl 100.106.15.10:8085/render?target=servers.*.elasticsearch.process.cpu.percent\&from=-1min\&format=json
+
+
+
 
 
 
