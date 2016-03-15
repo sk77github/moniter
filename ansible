@@ -86,3 +86,10 @@ task list中的各任务按次序逐个在hosts中指定的所有主机上执行
 ansible设计理念：
 make the remote system look like a state, and run the commands necessary to get it there.
 This is commonly referred to as ‘idempotence’, and is a core design goal of Ansible. 
+
+
+
+
+
+ansible常用playbook：
+https://github.com/dmichel1/ansible-graphite
