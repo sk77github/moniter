@@ -1,0 +1,7 @@
+故障解决：
+
+ gem sources -a https://ruby.taobao.org/
+ERROR:  While executing gem ... (Gem::Exception)
+    Unable to require openssl, install OpenSSL and rebuild ruby (preferred) or use non-HTTPS sources
+    
+    
