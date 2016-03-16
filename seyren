@@ -6,3 +6,6 @@ https://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat/
 
 seyren service script:
 https://github.com/wingZero21/Seyren-Init
+
+Install MongoDB version 3.0. At the moment (27/Dec/2015) Seyren is not compatible with current MongoDB version 3.2. 
+Issue on Seyren repo can be found :https://community.rackspace.com/products/f/25/t/6800
