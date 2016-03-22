@@ -95,7 +95,9 @@ Listen 13333
   WSGIScriptAlias / /opt/graphite/conf/graphite.wsgi
 
 
-  Alias /content/ /opt/graphite/webapp/content
+  Alias /content/ /opt/graphite/webapp/content/           /* 注意最后一个反斜线，如果没有的话会导致路径错误
+                                                             File does not exist: /opt/graphite/webapp/contentjs
+                                                             */
 
   SetHandler None
 
@@ -366,7 +368,9 @@ Listen 13333
   WSGIScriptAlias / /opt/graphite/conf/graphite.wsgi
 
 
-  Alias /content/ /opt/graphite/webapp/content
+  Alias /content/ /opt/graphite/webapp/content/           /* 注意最后一个反斜线，如果没有的话会导致路径错误
+                                                             File does not exist: /opt/graphite/webapp/contentjs
+                                                             */
 
   SetHandler None
 
