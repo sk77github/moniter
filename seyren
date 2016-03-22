@@ -38,7 +38,7 @@ seyren配置：
 graphite配置如下
 export GRAPHITE_URL=http://100.106.15.10:8085
 export GRAPHITE_USERNAME=xuwu
-export GRAPHITE_URL=xuwugraphite
+export GRAPHITE_PASSWORD=
 
 ----------------------------------------------------------------------------------------------------
 troubleshooting:
