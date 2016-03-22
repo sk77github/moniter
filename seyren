@@ -36,8 +36,8 @@ seyren配置：
 因为mongodb装在本机，使用默认配置，没有问题。
 
 graphite配置如下
-export GRAPHITE_URL=http://100.106.15.10:8085
-export GRAPHITE_USERNAME=xuwu
+export GRAPHITE_URL=http://ip:8085
+export GRAPHITE_USERNAME=
 export GRAPHITE_PASSWORD=
 
 ----------------------------------------------------------------------------------------------------
