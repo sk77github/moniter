@@ -54,6 +54,29 @@ GET /megacorp/employee/_search?q=last_name:Smith    根据字段搜索文档
 curl 'http://xxx.xxx.xxx.xxx:9200/logstash-yw-enterprise-2016-03-14(index)/_search?q=category:activity-user-getuserinfo&pretty'
 查询index为logstash-yw-enterprise-2016-03-14下的字段category等于activity-user-getuserinfo的所有文档
 
+删除索引
+curl -XDELETE http://xxx.xxx.xx:9200/xxx-2016-03-25?pretty
+查看集群状态 
+curl -XGET http://ip:9200/_cluster/health?pretty
+查看所有的nodes节点
+curl -XGET http://ip:9200/_cluster/state/nodes?pretty
+查看所有的indices
+curl -XGET http://100:9200/_cat/indices?v
+查看ES的插件
+curl -XGET http://100:9200/_nodes/plugin?pretty
+删除indexer
+curl -XDELETE http://100:9200/xxx-2016-03-25?pretty
+查看ES下面的type
+curl -XGET http://100:9200/_search?pretty
+查看ES下面的type的数据
+curl 'http://100:9200/_search?q=_type:activity&pretty'
+查看ES的mapping
+curl -XGET 'http://100:9200/logstash-2016-03-11/_mapping/activity?pretty'
+插入数据 
+curl -XPUT http://192:9200/blog/article/1?pretty -d '{"field1":1024}'  其中的blog为indexer   1为 ID -d 为send data
+查询某个索引下某个字段的值
+curl 'http://localhost:9200/_search?q=type:faceverify&q=userid:525779654234918904&pretty'
+
 
 安装：
 见elastcisearch_install.sh
