@@ -175,6 +175,10 @@ CLUSTER_SERVERS = ["xxx.xxx.xxx.xxx:80", "yyy.yyy.yyy.yyy:80"]
 web访问：
 curl 100.106.15.10:8085/render?target=servers.*.elasticsearch.process.cpu.percent\&from=-1min\&format=json
 
+打点接口：
+$cmd = "echo \"devops.gauges.laxin.${name} ${value} ${time}\" | nc ${server} ${port}";
+echo exec($cmd);
+
 
 
 
