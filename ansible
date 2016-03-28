@@ -71,6 +71,7 @@ ansible all -m file -a "dest=/tmp/hosts mode=600 owner=hadoop group=hadoop"   �
 ansible all -m file -a "dest=/tmp/hbase/config mode=755 owner=hadoop group=hadoop state=directory"   创建递归目录 类似 mkdir -p
 ansible all -m file -a "dest=/tmp/hbase/config state=absent" 删除文件
 ansible all -m service -a "name=httpd state=restarted"       在所有机器上重启httpd服务
+ansible es -m shell -a "cd /usr/share/elasticsearch/ && bin/plugin install mobz/elasticsearch-head && ls plugins/head/"  指定分组安装插件
 
 注意以上这些命令里的-m参数，指定模块，state说明状态，这是ansible的设计理念
 
