@@ -83,3 +83,87 @@ curl 'http://localhost:9200/_search?q=type:faceverify&q=userid:52577965423491890
 测试：
 curl 'http://localhost:9200/?pretty'
 curl -i -X GET 'http://localhost:9200/_count?pretty' 
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+repository:
+
+注册repository：
+curl -XPUT 'http://localhost:9200/_snapshot/my_backup' -d '{
+  "type": "fs",
+  "settings": {
+    "location": "/mount/backups/my_backup",
+    "compress": true
+  }
+}'
+
+查看repository：
+curl -XGET http://ip:9200/_snapshot/my_backup?pretty   查看my_backup这个repository
+curl -XGET http://ip:9200/_snapshot/repo*,*backup*?pretty   通过正则查看，以repo开头和包含backup的repository
+curl -XGET http://ip:9200/_snapshot/_all 或 curl -XGET http://ip:9200/_snapshot 查看所有repository
+
+验证repository：
+curl -XGET http://ip:9200/_snapshot/my_backup/_verify
+
+删除repository：
+curl -XDELETE http://ip:9200/_snapshot/my_backup
+
+
+snapshot:
+a snapshot represents the point-in-time view of the index at the moment when snapshot was created
+创建snapshot时，线上操作仍可用
+ 
+创建backup（snapshot）：
+curl -XPUT "localhost:9200/_snapshot/my_backup(repository下)/snapshot_1（快照1）?wait_for_completion=true"
+这个命令有load into memory操作，等待返回结果会有些慢
+
+指定indices创建snapshot：
+curl -XPUT 'http://localhost:9200/_snapshot/my_backup/snapshot_1' -d 
+'{
+  "indices": "index_1,index_2",
+  "ignore_unavailable": "true",
+  "include_global_state": false
+}'
+
+查看snapshot：
+curl -XGET http://ip:9200/_snapshot/my_backup/snapshot_1?pretty
+The command fails if some of the snapshots are unavailable. 
+The boolean parameter ignore_unvailable can be used to return all snapshots that are currently available.
+其他查看方式api与查看repository相同
+
+撤销正在running的snapshot：
+curl -XGET "localhost:9200/_snapshot/my_backup/_current"
+
+删除snapshot：
+curl -XDELETE http://ip:9200/_snapshot/my_backup/snapshot_1
+（取消backup操作）delete snapshot operation can be used to cancel long running snapshot operations that were started by mistake.
+
+还原snapshot：
+curl -XPOST "localhost:9200/_snapshot/my_backup/snapshot_1/_restore?wait_for_completion=true"
+By default, all indices in the snapshot as well as cluster state are restored
+
+自定义还原：
+curl -XPOST "localhost:9200/_snapshot/my_backup/snapshot_1/_restore" -d
+'{
+  "indices": "index_1,index_2",
+  "ignore_unavailable": "true",
+  "include_global_state": false,
+  "rename_pattern": "index_(.+)",
+  "rename_replacement": "restored_index_$1"
+}'
+
+Changing index settings during restore
+https://www.elastic.co/guide/en/elasticsearch/reference/2.2/modules-snapshots.html#_changing_index_settings_during_restore
+
+Restoring to a different cluster is supported
+https://www.elastic.co/guide/en/elasticsearch/reference/2.2/modules-snapshots.html#_restoring_to_a_different_cluster
+
+查看snapshot状态：
+GET /_snapshot/_status
+GET /_snapshot/my_backup/_status
+GET /_snapshot/my_backup/snapshot_1/_status
+GET /_snapshot/my_backup/snapshot_1,snapshot_2/_status
+
+取消restore操作：
+any currently running restore operation can be canceled by deleting indices that are being restored
