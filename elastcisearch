@@ -167,3 +167,24 @@ GET /_snapshot/my_backup/snapshot_1,snapshot_2/_status
 
 取消restore操作：
 any currently running restore operation can be canceled by deleting indices that are being restored
+
+
+snapshot hdfs:
+http://kibana.logstash.es/content/elasticsearch/snapshot.html
+https://github.com/elastic/elasticsearch-hadoop/tree/master/repository-hdfs
+http://bigbo.github.io/pages/2015/02/28/elasticsearch_hadoop/
+
+
+-----------------------------------------------------------------------------------------------
+plugin
+
+rpm -ql xxx       find where is the bin/plugin
+
+plugin install:
+
+core plugin
+bin/plugin install analysis-icu(plugin name)
+
+community_and_non_core_plugins
+bin/plugin install [org]/[user|component]/[version]
+https://www.elastic.co/guide/en/elasticsearch/plugins/2.2/installation.html#_community_and_non_core_plugins
