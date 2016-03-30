@@ -71,7 +71,7 @@ curl -XGET http://100:9200/_search?pretty
 查看ES下面的type的数据
 curl 'http://100:9200/_search?q=_type:activity&pretty'
 查看ES的mapping
-curl -XGET 'http://100:9200/logstash-2016-03-11/_mapping/activity?pretty'
+curl -XGET 'http://100:9200/logstash-2016-03-11/_mapping?pretty'
 插入数据 
 curl -XPUT http://192:9200/blog/article/1?pretty -d '{"field1":1024}'  其中的blog为indexer   1为 ID -d 为send data
 查询某个索引下某个字段的值
