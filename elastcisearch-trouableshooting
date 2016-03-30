@@ -1,0 +1,7 @@
+mapping 类型冲突 导致es不能存入数据
+报错类似于：
+MapperParsingException[failed to parse [context.rs]]; nested: IllegalArgumentException[unknown property [code]]
+解释：
+https://github.com/elastic/elasticsearch/issues/5084
+解决：
+规范日志格式与日志数据类型，与预想的mapping一致
