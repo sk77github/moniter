@@ -1,3 +1,5 @@
+安装
+
 yum install nodejs  
 （?centos的一些版本没有源
 yum install epel-release 
@@ -105,7 +107,8 @@ exit $RETVAL
 chmod 0755 /etc/init.d/statsd
 chkconfig --add statsd
 
-
+--------------------------------------------------------------------------------------------------------------------------
+使用
 
 logstash中的statsd输出配置：
 output {
@@ -119,9 +122,19 @@ output {
 
 
 statsd 查看：
- echo "counters" | nc 127.0.0.1 8126 
+echo "counters" | nc 127.0.0.1 8126 
+
+statsd打点：
+<metricname>:<value>|<type>
+echo "foo:1|c" | nc -u -w0 127.0.0.1 8125
  
- 
+对比graphite打点看：
+<key> <value> <timestamp>
+echo "foo 1 timestamp" | nc 127.0.0.1 2003
+
+
+---------------------------------------------------------------------------------------------------------------------------- 
+概念
  
 三个水平的度量：
 网络，机器（操作系统级，硬件），应用代码，第三方API
@@ -135,6 +148,7 @@ http://cookbook.logstash.net/recipes/statsd-metrics/
 http://blog.csdn.net/cnweike/article/details/30250483
 https://blog.pkhamre.com/understanding-statsd-and-graphite/
 )
+
 Counting: increment metric    Statsd::increment($metricName);
 If you have the default flush interval, 10 seconds, and send StatsD 7 increments on a counter with the flush interval,
 the counter would be 7 and the per-second value would be 0.7. No magic.
