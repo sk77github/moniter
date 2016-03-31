@@ -152,6 +152,11 @@ https://blog.pkhamre.com/understanding-statsd-and-graphite/
 Counting: increment metric    Statsd::increment($metricName);
 If you have the default flush interval, 10 seconds, and send StatsD 7 increments on a counter with the flush interval,
 the counter would be 7 and the per-second value would be 0.7. No magic.
+Counters ,当调用 increment 和 decrement 时，对参数进行自增或自减。
+采样率
+也可以通过 sample_rate 参数来设置采样率。假设 sample_rate=0.1：
+在采集周期 30 s 内，只采集 10% 的数据。也就是说，调用了 10 次 increment，只自增了一次 Metric。
+在数据量较大的情况下，可以确保采样的高效。
 
 Timing:   timing metric       Statsd::timing($metricName, rand(5000, 10000000) / 1000);
 Gauges:   count metric        Statsd::gauge($metricName, rand(100, 500));
