@@ -1,3 +1,9 @@
+A network daemon that runs on the Node.js platform and listens for statistics（这个单词是重点）, 
+like counters and timers,
+sent over UDP or TCP and sends aggregates（这是重点） to one or more pluggable backend services (e.g., Graphite).
+两个重点单词，指出了它干什么事。
+
+------------------------------------------------------------------------------------------------------
 安装
 
 yum install nodejs  
@@ -116,7 +122,9 @@ output {
     host => "192.168.1.14"
     port => 8125
     namespace => "logstash"
-    increment => "exception.number"
+    timing => [ "nginx.response.elapse", "%{upstream_time}" ]
+    increment => "nginx.response.number"
+    count => [ "nginx.response.bytes", "%{bytes}" ]
   }
 }
 
@@ -126,11 +134,33 @@ echo "counters" | nc 127.0.0.1 8126
 
 statsd打点：
 <metricname>:<value>|<type>
+type分c(counting),ms(timing),g(gauge),s(sets)四种类型
+
+Counting:
+<metricname>:1|c            这样的counting也可以叫increment，对应logstash statsd output插件的 increment
+<metricname>:-1|c           这样的counting也可以叫decrement，对应logstash statsd output插件的 decrement
+<metricname>:大于1的数|c    这样的counting也可以叫count，对应logstash statsd output插件的count
+
+Timing
+<metricname>:<value>|ms     对应logstash statsd output插件的timing
+
+Gauges
+<metricname>:<value>|g      对应logstash statsd output插件的gauge
+
+Sets
+<metricname>:<value>|s      对应logstash statsd output插件的set
+
+例如：
 echo "foo:1|c" | nc -u -w0 127.0.0.1 8125
  
 对比graphite打点看：
 <key> <value> <timestamp>
 echo "foo 1 timestamp" | nc 127.0.0.1 2003
+
+此外statsd打点有个采样率的概念：
+通过 sample_rate 参数来设置采样率。假设 sample_rate=0.1：
+在采集周期 30 s 内，只采集 10% 的数据。也就是说，调用了 10 次 increment，只自增了一次 Metric。
+在数据量较大的情况下，可以确保采样的高效。
 
 
 ---------------------------------------------------------------------------------------------------------------------------- 
@@ -140,34 +170,16 @@ echo "foo 1 timestamp" | nc 127.0.0.1 2003
 网络，机器（操作系统级，硬件），应用代码，第三方API
 
 
-StatsD Metric Types:
-(
-http://code.flickr.net/2008/10/27/counting-timing/
-https://github.com/etsy/statsd/blob/master/docs/metric_types.md
-http://cookbook.logstash.net/recipes/statsd-metrics/
-http://blog.csdn.net/cnweike/article/details/30250483
-https://blog.pkhamre.com/understanding-statsd-and-graphite/
-)
 
-Counting: increment metric    Statsd::increment($metricName);
+Counting: 
 If you have the default flush interval, 10 seconds, and send StatsD 7 increments on a counter with the flush interval,
 the counter would be 7 and the per-second value would be 0.7. No magic.
-Counters ,当调用 increment 和 decrement 时，对参数进行自增或自减。
-采样率
-也可以通过 sample_rate 参数来设置采样率。假设 sample_rate=0.1：
-在采集周期 30 s 内，只采集 10% 的数据。也就是说，调用了 10 次 increment，只自增了一次 Metric。
-在数据量较大的情况下，可以确保采样的高效。
-
-Timing:   timing metric       Statsd::timing($metricName, rand(5000, 10000000) / 1000);
-Gauges:   count metric        Statsd::gauge($metricName, rand(100, 500));
 
 
 理解statsd的flush interval：
 default 10s，在这个flush interval下的per secondvalue。for example：
 If you have the default flush interval, 10 seconds, and send StatsD 7 increments on a counter with the flush interval,
 the counter would be 7 and the per-second value would be 0.7. No magic.
-
-
 
 
 
