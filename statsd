@@ -162,7 +162,9 @@ echo "foo 1 timestamp" | nc 127.0.0.1 2003
 在采集周期 30 s 内，只采集 10% 的数据。也就是说，调用了 10 次 increment，只自增了一次 Metric。
 在数据量较大的情况下，可以确保采样的高效。
 
-
+metric类型参考：
+http://blog.csdn.net/cnweike/article/details/30250483
+https://blog.pkhamre.com/understanding-statsd-and-graphite/
 ---------------------------------------------------------------------------------------------------------------------------- 
 概念
  
