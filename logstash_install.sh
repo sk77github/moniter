@@ -334,6 +334,26 @@ elasticsearch {
             hosts => ["100.106.15.1:9200","100.106.15.2:9200","100.106.15.3:9200","100.106.15.6:9200","100.106.15.7:9200","100.106.15.9:9200"]
     }
 
+
+
+
+statsd：
+The default final metric sent to statsd would look like this:
+`namespace.sender.metric`
+With regards to this plugin, 
+the default namespace is "logstash",
+the default sender is the ${host} field, 
+and the metric name depends on what is set as the metric name in the increment, decrement, timing, count, `set or gauge variable.
+
+
+increment      对应statsd的打点格式：<metricname>:1|c
+decrement      对应statsd的打点格式：<metricname>:-1|c
+count          对应statsd的打点格式：<metricname>:大于1的数|c
+timing         对应statsd的打点格式：<metricname>:<value>|ms
+gauge          对应statsd的打点格式：<metricname>:<value>|g
+set            对应statsd的打点格式：<metricname>:<value>|s
+
+--------------------------------------------------------------------------------------------------------
 Codec:
     
 plain:
