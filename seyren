@@ -41,5 +41,8 @@ export GRAPHITE_USERNAME=
 export GRAPHITE_PASSWORD=
 
 ----------------------------------------------------------------------------------------------------
+If you make the warn value higher than the error value Seyren will alert when the value goes below the threshold.
+For example, a warn value of 0.75 and an error value of 0.5 would result in a good status at 1.0, warning at 0.7 and error at 0.4.
+--------------------------------------------------------------------------------------------------------
 troubleshooting:
 
