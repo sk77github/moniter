@@ -1,3 +1,4 @@
+1，
 mapping 类型冲突 导致es不能存入数据
 报错类似于：
 MapperParsingException[failed to parse [context.rs]]; nested: IllegalArgumentException[unknown property [code]]
@@ -5,3 +6,18 @@ MapperParsingException[failed to parse [context.rs]]; nested: IllegalArgumentExc
 https://github.com/elastic/elasticsearch/issues/5084
 解决：
 规范日志格式与日志数据类型，与预想的mapping一致
+
+
+
+2，
+kibana查不出数据，报Courier Fetch: 5 of 5 shards failed，
+进去kibana setting看到：
+Mapping conflict! 4 fields are defined as several types (string, integer, etc) across the indices that match this pattern. 
+You may still be able to use these conflict fields in parts of Kibana, but they will be unavailable for functions that require
+Kibana to know their type. Correcting this issue will require reindexing your data.,
+在此setting页面点击 type 使之排序 ，显示出了conflict的四个列：
+context.response.data.products.repay_amount  	conflict 				
+context.parmas.amount  	conflict 				
+context.response.data.amount  	conflict 				
+context.rs  	conflict 	String
+金额之前是数字类型的，可以做聚合与分析运行，开发改变打log方式后，变成了字符串，与之前的模式冲突
