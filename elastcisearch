@@ -56,6 +56,8 @@ curl 'http://xxx.xxx.xxx.xxx:9200/logstash-yw-enterprise-2016-03-14(index)/_sear
 
 删除索引
 curl -XDELETE http://xxx.xxx.xx:9200/xxx-2016-03-25?pretty
+正则删除匹配的索引：（删除logstash开头的3月份十几号的索引）
+curl -XDELETE http://100.106.15.1:9200/logstash-*-2016-03-1*?pretty
 查看集群状态 
 curl -XGET http://ip:9200/_cluster/health?pretty
 查看所有的nodes节点
@@ -64,8 +66,6 @@ curl -XGET http://ip:9200/_cluster/state/nodes?pretty
 curl -XGET http://100:9200/_cat/indices?v
 查看ES的插件
 curl -XGET http://100:9200/_nodes/plugin?pretty
-删除indexer
-curl -XDELETE http://100:9200/xxx-2016-03-25?pretty
 查看ES下面的type
 curl -XGET http://100:9200/_search?pretty
 查看ES下面的type的数据
