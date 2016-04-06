@@ -27,6 +27,8 @@ bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic enterprise-ng-l
 查看topic在某个offset的message
 /data/kafka/bin/kafka-simple-consumer-shell.sh --topic nginxlog --broker-list xxx.xxx.xxx.x:9092,xxx.xxx.xxx.x:9092,xxx.xxx.xxx.x:9092 
                                                --partition 0 --offset 395702521 --max-messages 10  --print-offsets 
+查看topic在某个offset的message，不指定--offset,从末尾消费10条：
+bin/kafka-simple-consumer-shell.sh --topic friend-yw-log --broker-list 100.106.15.1:9092 --partition 0 --max-messages 10  --print-offsets
 
 动态更改topic配置
 > bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic my-topic
