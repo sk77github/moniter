@@ -21,3 +21,9 @@ context.parmas.amount  	conflict
 context.response.data.amount  	conflict 				
 context.rs  	conflict 	String
 金额之前是数字类型的，可以做聚合与分析运行，开发改变打log方式后，变成了字符串，与之前的模式冲突
+
+3,
+报low disk watermark [85%] exceeded on [O-AU4JgEQhCb6KUr9LB1Vg][node-3][/data/elasticsearch/elasticsearch_data/elk-monitor/nodes/0]
+free: 422.9gb[13.1%], replicas will not be assigned to this node
+磁盘使用空间与sharding：
+https://www.elastic.co/guide/en/elasticsearch/reference/1.5/index-modules-allocation.html
