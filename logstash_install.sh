@@ -276,6 +276,20 @@ tag_on_failure
 Value type is array
 Default value is ["_grokparsefailure"]
 Append values to the tags field when there has been no successful match
+使用说明：
+一，预定义匹配模式
+55.3.244.1 GET /index.html 15824 0.043
+%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}
+  正则模式:字段描述符
+
+二，自定义匹配模式，正则命名捕获
+(?<field_name>the pattern here)
+For example, postfix logs have a queue id that is an 10 or 11-character hexadecimal value. I can capture that easily like this:
+(?<queue_id>[0-9A-F]{10,11})
+自定义模式文件：
+patterns
+相当于把第一步里的正则表达式用名称代替，比如用WORD代替\w+(所有的字母出现一次或多次)
+
 
 
 date
