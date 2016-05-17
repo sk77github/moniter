@@ -19,7 +19,7 @@ filter {
             match => ["message", "%{NGINX_FORMAT}"]
             patterns_dir => "/etc/logstash/patterns"
         }
-        date {
+        date {//The date filter is used for parsing dates from fields, and then using that date or timestamp as the logstash timestamp for the event.
             match => [ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
         }
     }
