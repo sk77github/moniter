@@ -8,13 +8,13 @@ bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
 logstash shipper配置start：
 input {
   file {
-        type => "enterprise-ng-log"
+        type => "test-ng-log"
         path => [ "/data/logs/access.log" ]
      }
 }
 
 filter {
-    if [type] == "enterprise-ng-log" {
+    if [type] == "test-ng-log" {
         grok {
             match => ["message", "%{NGINX_FORMAT}"]
             patterns_dir => "/etc/logstash/patterns"
@@ -26,10 +26,10 @@ filter {
 }
 
 output {
-  if [type] == "enterprise-ng-log" {
+  if [type] == "test-ng-log" {
     kafka {
         bootstrap_servers => "xxx.xxx.xxx.xxx:9092, xxx.xxx.xxx.xxx:9092, xxx.xxx.xxx.xxx:9092"
-        topic_id => "enterprise-ng-log"
+        topic_id => "test-ng-log"
       }
   }
 }
@@ -56,9 +56,9 @@ bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic enterprise-ng-l
 logstash indexer配置 start：
 input{
     kafka {
-        topic_id => "enterprise-ng-log"
+        topic_id => "test-ng-log"
         zk_connect => "xxx.xxx.xxx.xxx:2181,xxx.xxx.xxx.xxx:2181,xxx.xxx.xxx.xxx:2181"
-        group_id =>"enterprise-ng-log-Group"
+        group_id =>"test-ng-log-Group"
         consumer_threads => 3
     }
 }
