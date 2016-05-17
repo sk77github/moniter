@@ -1,8 +1,7 @@
 基于logstash，kafka，elasticsearch，grafana的日志监控
 logstash的type，kafka的topic，ES的index，一一对应
 
-需要先在kafka上创建topic
-bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic enterprise-ng-log --partitions 3 --replication-factor 2  
+ 
 查看某个topic的分布情况
 bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
 
