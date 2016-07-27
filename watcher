@@ -1,2 +1,26 @@
-A watch schedule controls how often a watch is triggered. 
-The watch input gets the data that you want to evaluate.
+
+watcher四个概念：
+A watch schedule controls how often a watch is triggered. （就是一个某个周期性行为的频率）
+The watch input gets the data that you want to evaluate.（就是数据来源）
+A condition evaluates the data you’ve loaded into the watch and determines if any action is required.（就是对数据设定触发条件） 
+The watch’s actions define what to do when the watch condition evaluates to true--
+you can send emails, call third-party webhooks等等（触发条件后的行为）
+
+input类型：
+ search  一个对es的查询
+ http    一个http接口的查询
+ 
+条件类型：
+比较：
+  比较类型：
+   eq 相等（可是等于一个字符串比如 red 也可以是一个数值）
+   gt 大于
+   
+ctx.payload.*    The payload data loaded by the watch’s input.
+
+
+http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-scripting.html  这个重点看下，主要是用脚本写触发报警条件
+
+安装：
+https://www.elastic.co/guide/en/watcher/current/installing-watcher.html
+
