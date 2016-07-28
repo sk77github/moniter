@@ -1,0 +1,4 @@
+
+Zabbix的告警流程：
+Host Groups(设备组)-Host(设备)-Applications(监控项组)-Items(监控项)- \
+Triggers(触发器)-Actions(告警动作)-Medias(告警方式)-User Groups(用户组)-Users(用户)
