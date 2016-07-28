@@ -2,3 +2,8 @@
 Zabbix的告警流程：
 Host Groups(设备组)-Host(设备)-Applications(监控项组)-Items(监控项)- \
 Triggers(触发器)-Actions(告警动作)-Medias(告警方式)-User Groups(用户组)-Users(用户)
+
+
+Items的作用是采集数据，而不是判断采集到的数据是否属于正常值，Tigger的作用是对采集到的数据进行阈值状态的判断，触发阈值，则会产生一个事件，
+同时，Action对达到条件的Trigger触发告警动作。
+触发器允许设置一个阈值来决定什么数据是可以接收的，如果进入的数据超过可接受的状态，触发器则会被触发。触发器有两种状态OK/PROBLEM
