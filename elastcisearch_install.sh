@@ -1,3 +1,35 @@
+rpm安装目录拓扑：
+https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-dir-layout.html
+
+rpm -ivh elasticsearch-2.3.4.rpm 
+warning: elasticsearch-2.3.4.rpm: Header V4 RSA/SHA1 Signature, key ID d88e42b4: NOKEY
+Preparing...                ########################################### [100%]
+Creating elasticsearch group... OK
+Creating elasticsearch user... OK
+   1:elasticsearch          ########################################### [100%]
+### NOT starting on installation, please execute the following statements to configure elasticsearch service to start automatically using chkconfig
+ sudo chkconfig --add elasticsearch
+### You can start elasticsearch service by executing
+ sudo service elasticsearch start
+ 
+ 
+#修改 /etc/elasticsearch/elasticsearch.yml
+  node.name=xxxx 集群中某个结点的名称
+#集群如何发现节点 该版本为单播的形式
+  discovery.zen.ping.unicast.hosts: ["192.168.1.10", "192.168.1.11"]
+#修改可用最大内存 /etc/sysconfig/elasticsearch
+  ES_HEAP_SIZE=xxxx  #最大不超过32G 
+ 
+  
+#启动命令
+ service elasticsearch start
+#停止命令
+ service elasticsearch stop
+
+
+
+-----------------------------------------------------------------------------------------------------
+
 #安装 elasticsearch 版本 2.1.1 方式 RPM
 #自动化安装脚本
 #!/bin/bash
@@ -196,16 +228,8 @@ echo "set [/etc/elasticsearch/elasticsearch.yml] param node.name=xxxx manual"
 echo "set [/etc/elasticsearch/elasticsearch.yml] discovery.zen.ping.unicast.hosts: ["192.168.1.10", "192.168.1.11"] manual"
 echo "set [/etc/sysconfig/elasticsearch] param ES_HEAP_SIZE=xxxx manual"
 
-#修改 /etc/elasticsearch/elasticsearch.yml
-   node.name=xxxx 集群中某个结点的名称
-#集群如何发现节点 该版本为单播的形式
-  discovery.zen.ping.unicast.hosts: ["192.168.1.10", "192.168.1.11"]
-#修改可用最大内存 /etc/sysconfig/elasticsearch
-  ES_HEAP_SIZE=xxxx  #最大不超过32G 
-#启动命令
- service elasticsearch start
- #停止命令
-  service elasticsearch stop
+-----------------------------------------------------------------------------------------------------------------------
+
 
 #安装kibana 版本 4.3.1 
 wget https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x64.tar.gz
