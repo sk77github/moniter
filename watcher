@@ -36,3 +36,12 @@ cd /usr/share/elasticsearch
 sudo bin/plugin install license
 sudo bin/plugin install watcher
 
+卸载：
+To uninstall Watcher:
+
+1，Shut down Elasticsearch.
+
+2，Remove the Watcher plugin from Elasticsearch:
+   bin/plugin remove watcher
+3，Restart Elasticsearch.
+
