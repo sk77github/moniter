@@ -29,3 +29,10 @@ https://www.elastic.co/guide/en/watcher/current/installing-watcher.html
 When you deploy watcher on a separate cluster, you use the HTTP input to send search requests to the cluster you are monitoring and
 load the results into a watch’s payload.
 
+To install the Watcher and License plugins on a DEB/RPM package installation, you need to run bin/plugin install
+from the /usr/share/elasticsearch directory with superuser permissions. For example:
+
+cd /usr/share/elasticsearch
+sudo bin/plugin install license
+sudo bin/plugin install watcher
+
