@@ -6,6 +6,7 @@ A condition evaluates the data you’ve loaded into the watch and determines if 
 The watch’s actions define what to do when the watch condition evaluates to true--
 you can send emails, call third-party webhooks等等（触发条件后的行为）
 
+---------------------------------------------------------------------------------------------
 input类型：
  search  一个对es的查询
  http    一个http接口的查询
@@ -21,6 +22,10 @@ ctx.payload.*    The payload data loaded by the watch’s input.
 
 http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-scripting.html  这个重点看下，主要是用脚本写触发报警条件
 
+------------------------------------------------------------------------------------------
 安装：
 https://www.elastic.co/guide/en/watcher/current/installing-watcher.html
+
+When you deploy watcher on a separate cluster, you use the HTTP input to send search requests to the cluster you are monitoring and
+load the results into a watch’s payload.
 
