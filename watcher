@@ -23,6 +23,18 @@ ctx.payload.*    The payload data loaded by the watch’s input.
 http://www.elastic.co/guide/en/elasticsearch/reference/2.3/modules-scripting.html  这个重点看下，主要是用脚本写触发报警条件
 
 ------------------------------------------------------------------------------------------
+search:
+
+Conditions, transforms, and actions can access the search results through the watch execution context. For example:
+
+To load all of the search hits into an email body, use ctx.payload.hits.
+To reference the total number of hits, use ctx.payload.hits.total.
+To access a particular hit, use its zero-based array index. For example, to get the third hit, use ctx.payload.hits.hits.2.
+To get a field value from a particular hit, use ctx.payload.hits.hits.<index>.fields.<fieldname>. 
+For example, to get the message field from the first hit, use ctx.payload.hits.hits.0.fields.message.
+
+应用之一，比如mysql慢查询报警，可以报详细的sql（然后有个合适的策略，报出不是偶发的慢查询，然后就可以直接报给开发了）
+-------------------------------------------------------------------------------------------------
 安装：
 https://www.elastic.co/guide/en/watcher/current/installing-watcher.html
 
