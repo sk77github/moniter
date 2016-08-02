@@ -104,5 +104,33 @@ output {
 
 }
 
+处理输出事件如下：
+
+{
+    "@timestamp": "2016-05-24T06:19:01.000Z", 
+    "message": "# User@Host: db_r[db_r] @  [100.100.100.100]  Id: 182295
+                # Query_time: 2.463791  Lock_time: 0.000026 Rows_sent: 0  Rows_examined: 1008586
+                use db;
+                SET timestamp=1464070741;
+                select * from eas_ray_info WHERE RAY_TIME >= '2016-01-01 00:00:00';
+                # Time: 160524 14:19:06", 
+    "@version": "1", 
+    "tags": [
+        "multiline"
+    ], 
+    "path": "/var/log/logstash/mysql_slow.log", 
+    "host": "localhost", 
+    "type": "mysql-slow", 
+    "user": "db_r", 
+    "clientip": "100.100.100.100", 
+    "id": 182295, 
+    "query_time": 2.463791, 
+    "lock_time": 260000, 
+    "rows_sent": 0, 
+    "rows_examined": 1008586, 
+    "database": "db", 
+    "query": "select * from as_ay_info WHERE RY_TIME>= '2016-01-01 00:00:00';", 
+    "action": "select"
+}
 
 ---------------------------------------------------------------------------------------------------------------------------------
