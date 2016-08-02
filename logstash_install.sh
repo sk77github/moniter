@@ -386,7 +386,12 @@ timing         对应statsd的打点格式：<metricname>:<value>|ms
 gauge          对应statsd的打点格式：<metricname>:<value>|g
 set            对应statsd的打点格式：<metricname>:<value>|s
 
+
+file
+当以文件做为output时，需要注意文件所在目录，logstash需要具有写权限
 --------------------------------------------------------------------------------------------------------
+
+
 Codec:
     
 plain:
