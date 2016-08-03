@@ -98,7 +98,16 @@ curl -i -X GET 'http://localhost:9200/_count?pretty'
 ------------------------------------------------------------------------------------------------------------------------
 运维使用：
 
-1,字符串字段的两个重要映射属性：index and analyzer.
+模板（template）：
+
+
+mapping：
+https://www.elastic.co/guide/en/elasticsearch/guide/current/mapping-intro.html
+
+
+
+字符串字段的两个重要映射属性：index and analyzer.
+We can update a mapping to add a new field, but we can’t change an existing field from analyzed to not_analyzed.
 
 index
 The index attribute controls how the string will be indexed. It can contain one of three values:
@@ -136,6 +145,9 @@ such as whitespace, simple, or english:
 }
 
 
+
+grafana等调用的查询API:
+https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
 -------------------------------------------------------------------------------------------------------------------------
 repository:
 
