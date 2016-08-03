@@ -99,6 +99,8 @@ curl -i -X GET 'http://localhost:9200/_count?pretty'
 运维使用：
 
 模板（template）：
+查看模板： curl -XGET 'http://127.0.0.1:9200/_template?pretty'
+删除模板（也可用来测试新建的模板是否存在）：curl -XDELETE localhost:9200/_template/template-mysql-slowlog-logstash?pretty
 
 
 mapping：
