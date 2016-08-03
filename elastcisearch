@@ -4,6 +4,7 @@
 Elasticsearch的元素组成
 关系数据库     ⇒ 数据库 ⇒ 表    ⇒ 行    ⇒ 列(Columns)
 Elasticsearch  ⇒ 索引   ⇒ 类型  ⇒ 文档  ⇒ 字段(Fields)
+ES还要注意mapping的概念，mapping与template概念及索引相关，template可定义当创建索引时自动使用template里的mapping
 一个 Elasticsearch 集群可以包含多个 索引（数据库），也就是说其中包含了很多 类型（表）。这些类型中包含了很多的 文档（行），
 然后每个文档中又包含了很多的 字段（列）。
 例如：
