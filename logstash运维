@@ -1,0 +1,12 @@
+logstash  input里  或者 output里   有多个输入或者输出并列，然后这个启动的logstash进程如何处理他们呢？
+
+
+
+        logstash的agent 将文件/etc/init.d/logstash 中LS_HEAP_SIZE="1g" 修改成LS_HEAP_SIZE="4g"
+
+         kafka 宕机对线上业务机器的影响评估:
+测试环境   3台组成kafka集群   3台组成zookeeper集群
+1 3台kafka中的一台crash 
+2 3台kafka中的两台crash
+3 整个集群crash  
+       上述情况发生的条件下，agent所在的业务机并未出现cpu负载飙，将所有logstash agent这块占用资源 我们用openfalcon这块可视化监控起来。
