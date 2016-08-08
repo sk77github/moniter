@@ -67,3 +67,14 @@ To uninstall Watcher:
    bin/plugin remove watcher
 3，Restart Elasticsearch.
 
+
+------------------------------------------------------------------------------
+使用：
+
+查看：
+curl -XGET 'http://localhost:9200/.watches/_search?pretty'
+创建：
+curl -XPUT 'http://localhost:9200/_watcher/watch/mysqlslowlog_watch' -d '{"trigger":{"schedule":{"interval":"10s"}},"input":{"search":{"request":{"indices":["logstash-mysqlslowlog-2016-08-08"],"body":{"query":{"match":{"type":"mysqlslowlog"}}}}}},"condition":{"compare":{"ctx.payload.hits.total":{"gt":0}}},"actions":{"log_error":{"logging":{"text":"Found {{ctx.payload.hits.total}} errors in the logs"}}}}'
+
+响应报警：
+curl -XPUT 'http://localhost:9200/_watcher/watch/mysqlslowlog_watch/_ack'
